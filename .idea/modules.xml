@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/QB.iml" filepath="$PROJECT_DIR$/QB.iml" />
+      <module fileurl="file://C:\1\SmiDmi\QuestBook\QB.iml" filepath="C:\1\SmiDmi\QuestBook\QB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuestBook.iml" filepath="$PROJECT_DIR$/QuestBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\1\SmiDmi\QuestBook\app\app.iml" filepath="C:\1\SmiDmi\QuestBook\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvp/mvp.iml" filepath="$PROJECT_DIR$/mvp/mvp.iml" />
+      <module fileurl="file://C:\1\SmiDmi\QuestBook\mvp\mvp.iml" filepath="C:\1\SmiDmi\QuestBook\mvp\mvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
     </modules>
   </component>
 </project>

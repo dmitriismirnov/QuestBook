@@ -1,4 +1,4 @@
-package ru.pochtabank.mvp;
+package ru.mvp;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.pochtabank.mvp;
+package ru.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
