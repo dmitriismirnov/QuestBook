@@ -252,7 +252,7 @@ public final class DiskLruCache implements Closeable {
     }
 
     private void readJournal() throws IOException {
-        ru.pochtabank.utils.diskCache.StrictLineReader reader = new ru.pochtabank.utils.diskCache.StrictLineReader(new FileInputStream(journalFile), ru.pochtabank.utils.diskCache.Util.US_ASCII);
+        ru.utils.diskCache.StrictLineReader reader = new ru.utils.diskCache.StrictLineReader(new FileInputStream(journalFile), ru.utils.diskCache.Util.US_ASCII);
         try {
             String magic = reader.readLine();
             String version = reader.readLine();
@@ -284,10 +284,10 @@ public final class DiskLruCache implements Closeable {
                 rebuildJournal();
             } else {
                 journalWriter = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(journalFile, true), ru.pochtabank.utils.diskCache.Util.US_ASCII));
+                        new FileOutputStream(journalFile, true), ru.utils.diskCache.Util.US_ASCII));
             }
         } finally {
-            ru.pochtabank.utils.diskCache.Util.closeQuietly(reader);
+            ru.utils.diskCache.Util.closeQuietly(reader);
         }
     }
 
@@ -363,7 +363,7 @@ public final class DiskLruCache implements Closeable {
         }
 
         Writer writer = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(journalFileTmp), ru.pochtabank.utils.diskCache.Util.US_ASCII));
+                new OutputStreamWriter(new FileOutputStream(journalFileTmp), ru.utils.diskCache.Util.US_ASCII));
         try {
             writer.write(MAGIC);
             writer.write("\n");
@@ -393,7 +393,7 @@ public final class DiskLruCache implements Closeable {
         journalFileBackup.delete();
 
         journalWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(journalFile, true), ru.pochtabank.utils.diskCache.Util.US_ASCII));
+                new OutputStreamWriter(new FileOutputStream(journalFile, true), ru.utils.diskCache.Util.US_ASCII));
     }
 
     private static void deleteIfExists(File file) throws IOException {
@@ -440,7 +440,7 @@ public final class DiskLruCache implements Closeable {
             // A file must have been deleted manually!
             for (int i = 0; i < valueCount; i++) {
                 if (ins[i] != null) {
-                    ru.pochtabank.utils.diskCache.Util.closeQuietly(ins[i]);
+                    ru.utils.diskCache.Util.closeQuietly(ins[i]);
                 } else {
                     break;
                 }
@@ -666,7 +666,7 @@ public final class DiskLruCache implements Closeable {
      */
     public void delete() throws IOException {
         close();
-        ru.pochtabank.utils.diskCache.Util.deleteContents(directory);
+        ru.utils.diskCache.Util.deleteContents(directory);
     }
 
     private void validateKey(String key) {
@@ -678,7 +678,7 @@ public final class DiskLruCache implements Closeable {
     }
 
     private static String inputStreamToString(InputStream in) throws IOException {
-        return ru.pochtabank.utils.diskCache.Util.readFully(new InputStreamReader(in, ru.pochtabank.utils.diskCache.Util.UTF_8));
+        return ru.utils.diskCache.Util.readFully(new InputStreamReader(in, ru.utils.diskCache.Util.UTF_8));
     }
 
     /** A snapshot of the values for an entry. */
@@ -721,7 +721,7 @@ public final class DiskLruCache implements Closeable {
 
         public void close() {
             for (InputStream in : ins) {
-                ru.pochtabank.utils.diskCache.Util.closeQuietly(in);
+                ru.utils.diskCache.Util.closeQuietly(in);
             }
         }
     }
@@ -816,10 +816,10 @@ public final class DiskLruCache implements Closeable {
         public void set(int index, String value) throws IOException {
             Writer writer = null;
             try {
-                writer = new OutputStreamWriter(newOutputStream(index), ru.pochtabank.utils.diskCache.Util.UTF_8);
+                writer = new OutputStreamWriter(newOutputStream(index), ru.utils.diskCache.Util.UTF_8);
                 writer.write(value);
             } finally {
-                ru.pochtabank.utils.diskCache.Util.closeQuietly(writer);
+                ru.utils.diskCache.Util.closeQuietly(writer);
             }
         }
 

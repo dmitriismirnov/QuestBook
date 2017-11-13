@@ -7,8 +7,8 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 
-import ru.pochtabank.utils.Config;
-import ru.pochtabank.utils.data.JsonKeys;
+import ru.utils.Config;
+import ru.utils.data.JsonKeys;
 
 /**
  * a

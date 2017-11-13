@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public enum Feature {
     kUndefined(""),
-    kImages(ru.pochtabank.utils.data.JsonKeys.JSON_FEATURE_IMAGES),
-    kSearch(ru.pochtabank.utils.data.JsonKeys.JSON_FEATURE_SEARCH);
+    kImages(ru.utils.data.JsonKeys.JSON_FEATURE_IMAGES),
+    kSearch(ru.utils.data.JsonKeys.JSON_FEATURE_SEARCH);
 
     private static Map<String, Feature> mValuesMap;
     private String mKey;

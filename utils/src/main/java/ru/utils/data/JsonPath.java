@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import ru.pochtabank.utils.LogUtils;
+import ru.utils.LogUtils;
 
 // FIXME: code refactoring is needed
 public class JsonPath
@@ -143,7 +143,7 @@ public class JsonPath
     {
         JsonElement possibleResult = getElementsForPath(root, keys, Collections.singletonList(new JsonPrimitive(defaultValue))).get(0);
         return possibleResult.isJsonPrimitive() ?
-                ru.pochtabank.utils.data.ParseUtils.parseInt(possibleResult.getAsString(), defaultValue) : defaultValue;
+                ru.utils.data.ParseUtils.parseInt(possibleResult.getAsString(), defaultValue) : defaultValue;
     }
 
     public static float getFloat(JsonObject root, String path, float defaultValue) {
@@ -154,7 +154,7 @@ public class JsonPath
     {
         JsonElement possibleResult = getElementsForPath(root, keys, Collections.singletonList(new JsonPrimitive(defaultValue))).get(0);
         return possibleResult.isJsonPrimitive() ?
-                ru.pochtabank.utils.data.ParseUtils.parseFloat(possibleResult.getAsString(), defaultValue) : defaultValue;
+                ru.utils.data.ParseUtils.parseFloat(possibleResult.getAsString(), defaultValue) : defaultValue;
     }
 
     public static JsonElement getJsonElement(JsonObject root, String path, JsonElement defaultValue)
@@ -226,7 +226,7 @@ public class JsonPath
     public static int getInt(JsonObject root, List<String> keys) throws InvalidPathException
     {
         JsonElement possibleResult = getElementsForPath(root, keys).get(0);
-        if (possibleResult.isJsonPrimitive() && ru.pochtabank.utils.data.ParseUtils.tryParseInt(possibleResult.getAsString())) {
+        if (possibleResult.isJsonPrimitive() && ru.utils.data.ParseUtils.tryParseInt(possibleResult.getAsString())) {
             return possibleResult.getAsInt();
         }
         else {
@@ -242,7 +242,7 @@ public class JsonPath
     public static float getFloat(JsonObject root, List<String> keys) throws InvalidPathException
     {
         JsonElement possibleResult = getElementsForPath(root, keys).get(0);
-        if (possibleResult.isJsonPrimitive() && ru.pochtabank.utils.data.ParseUtils.tryParseFloat(possibleResult.getAsString())) {
+        if (possibleResult.isJsonPrimitive() && ru.utils.data.ParseUtils.tryParseFloat(possibleResult.getAsString())) {
             return possibleResult.getAsFloat();
         }
         else {
@@ -356,7 +356,7 @@ public class JsonPath
             }
             else
             {
-                if (ru.pochtabank.utils.data.ParseUtils.tryParseInt(key))
+                if (ru.utils.data.ParseUtils.tryParseInt(key))
                 {
                     int keyAsInt = Integer.valueOf(key);
                     if (keyAsInt >= 0 && keyAsInt < rootArr.size()) {

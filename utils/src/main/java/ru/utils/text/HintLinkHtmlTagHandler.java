@@ -1,4 +1,4 @@
-﻿package ru.utils.text;
+package ru.utils.text;
 
 import android.graphics.Color;
 import android.text.Editable;

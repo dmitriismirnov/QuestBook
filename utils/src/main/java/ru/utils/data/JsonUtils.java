@@ -1,3 +1,4 @@
+
 package ru.utils.data;
 
 import android.support.annotation.NonNull;
@@ -17,7 +18,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
-import ru.pochtabank.utils.LogUtils;
+import ru.utils.LogUtils;
 
 public final class JsonUtils {
     private static final String TAG = JsonUtils.class.getSimpleName();
@@ -130,7 +131,7 @@ public final class JsonUtils {
                 }
 
                 String string = elem.getAsString();
-                if(!ru.pochtabank.utils.data.ParseUtils.tryParseInt(string)) {
+                if(!ru.utils.data.ParseUtils.tryParseInt(string)) {
                     throw new NoSuchElementException("Key not found: " + key);
                 }
 
@@ -207,7 +208,7 @@ public final class JsonUtils {
                 }
 
                 String string = elem.getAsString();
-                if(!ru.pochtabank.utils.data.ParseUtils.tryParseLong(string)) {
+                if(!ru.utils.data.ParseUtils.tryParseLong(string)) {
                     throw new NoSuchElementException("Key not found: " + key);
                 }
 
@@ -255,7 +256,7 @@ public final class JsonUtils {
                 }
 
                 String string = elem.getAsString();
-                if(!ru.pochtabank.utils.data.ParseUtils.tryParseFloat(string)) {
+                if(!ru.utils.data.ParseUtils.tryParseFloat(string)) {
                     throw new NoSuchElementException("Key not found: " + key);
                 }
 
@@ -292,7 +293,7 @@ public final class JsonUtils {
                 }
 
                 String string = elem.getAsString();
-                if(!ru.pochtabank.utils.data.ParseUtils.tryParseDouble(string)) {
+                if(!ru.utils.data.ParseUtils.tryParseDouble(string)) {
                     throw new NoSuchElementException("Key not found: " + key);
                 }
 

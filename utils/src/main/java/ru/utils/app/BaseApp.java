@@ -1,4 +1,4 @@
-﻿package ru.utils.app;
+package ru.utils.app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

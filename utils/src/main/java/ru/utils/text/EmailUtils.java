@@ -1,4 +1,4 @@
-package ru.pochtabank.utils.text;
+package ru.utils.text;
 
 import android.text.TextUtils;
 import android.util.Patterns;

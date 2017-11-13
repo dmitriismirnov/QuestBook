@@ -1,4 +1,4 @@
-﻿package ru.utils.text;
+package ru.utils.text;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;

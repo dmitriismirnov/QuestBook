@@ -1,6 +1,7 @@
 package ru.utils.events;
 
-public abstract class BaseTimestampEvent {
+public abstract class BaseTimestampEvent
+{
 // -- Construction
 
     public BaseTimestampEvent() {

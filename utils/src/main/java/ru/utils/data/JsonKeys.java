@@ -1,4 +1,4 @@
-﻿package ru.utils.data;
+package ru.utils.data;
 
 
 public final class JsonKeys {

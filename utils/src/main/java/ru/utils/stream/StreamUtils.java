@@ -1,4 +1,4 @@
-﻿package ru.utils.stream;
+package ru.utils.stream;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import ru.pochtabank.utils.LogUtils;
+import ru.utils.LogUtils;
 
 /**
  * a

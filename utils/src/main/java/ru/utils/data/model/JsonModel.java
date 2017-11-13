@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
-import ru.pochtabank.utils.LogUtils;
-import ru.pochtabank.utils.data.GsonUtils;
+import ru.utils.LogUtils;
+import ru.utils.data.GsonUtils;
 
-public abstract class JsonModel extends ru.pochtabank.utils.data.model.ParcelableObject
+public abstract class JsonModel extends ru.utils.data.model.ParcelableObject
 {
 // -- construction
 
@@ -19,7 +19,7 @@ public abstract class JsonModel extends ru.pochtabank.utils.data.model.Parcelabl
     {
         JsonObject jsonObj = null;
         try {
-            jsonObj = ru.pochtabank.utils.data.JsonUtils.toJsonObject(jsonStr);
+            jsonObj = ru.utils.data.JsonUtils.toJsonObject(jsonStr);
         }
         catch (JsonSyntaxException e) {
             LogUtils.w(TAG, e);
@@ -41,11 +41,11 @@ public abstract class JsonModel extends ru.pochtabank.utils.data.model.Parcelabl
                 JsonElement schema = getJsonSchema((String)clazz.getMethod("getJsonSchemaPath").invoke(null));
                 if (schema != null && schema.isJsonObject())
                 {
-                    ru.pochtabank.utils.data.validator.JsonValidator.validate((JsonObject) schema, jsonObj);
+                    ru.utils.data.validator.JsonValidator.validate((JsonObject) schema, jsonObj);
                     isValid = true;
                 }
             }
-            catch (NoSuchMethodException | IllegalArgumentException | IllegalAccessException | InvocationTargetException | ru.pochtabank.utils.data.validator.JsonValidationException e) {
+            catch (NoSuchMethodException | IllegalArgumentException | IllegalAccessException | InvocationTargetException | ru.utils.data.validator.JsonValidationException e) {
                 LogUtils.w(TAG, e);
             }
 
@@ -179,7 +179,7 @@ public abstract class JsonModel extends ru.pochtabank.utils.data.model.Parcelabl
         // build JsonElement from JSON String
         JsonElement jsonElm = null;
         try {
-            jsonElm = ru.pochtabank.utils.data.JsonUtils.toJsonElement(ru.pochtabank.utils.data.StreamUtils.convertStreamToString(is));
+            jsonElm = ru.utils.data.JsonUtils.toJsonElement(ru.utils.data.StreamUtils.convertStreamToString(is));
         }
         finally {
             if (is != null) {

@@ -9,8 +9,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-import ru.pochtabank.utils.LogUtils;
-import ru.pochtabank.utils.stream.StreamUtils;
+import ru.utils.LogUtils;
+import ru.utils.stream.StreamUtils;
 
 
 public class RootDetectionUtils {
