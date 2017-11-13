@@ -1,4 +1,4 @@
-package ru.pochtabank.mvp;
+package ru.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
