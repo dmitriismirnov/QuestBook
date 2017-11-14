@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
     defaultConfig {
         applicationId "com.smirnov.dmitrii.questbook"
         minSdkVersion versions.minSdk
@@ -19,13 +21,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     //noinspection GradleCompatible
     compile libraries.supportAppCompat
