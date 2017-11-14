@@ -40,7 +40,7 @@ dependencies {
     compile libraries.supportVectors
     compile libraries.eventBus
     compile libraries.butterKnife
-
+    compile libraries.calligraphy
 
 
     compile project(':mvp')

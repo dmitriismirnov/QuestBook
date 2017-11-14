@@ -1,7 +1,10 @@
 package com.smirnov.dmitrii.questbook.ui.activity.story;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Window;
@@ -16,10 +19,14 @@ import com.smirnov.dmitrii.questbook.ui.activity.BaseFragmentActivity;
 
 public class StoryActivity extends BaseFragmentActivity {
 
+    public static void start(@NonNull Activity activity) {
+        Intent intent = new Intent(activity, StoryActivity.class);
+        activity.startActivity(intent);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
     @Override

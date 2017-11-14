@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NavigationToolbar">
+        <attr name="nt_background" format="reference"/>
+        <attr name="nt_back_button" format="reference"/>
+        <attr name="nt_icon" format="reference"/>
+        <attr name="nt_title" format="string"/>
+        <attr name="nt_title_color" format="reference"/>
+    </declare-styleable>
+</resources>
