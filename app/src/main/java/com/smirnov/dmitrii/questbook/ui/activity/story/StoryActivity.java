@@ -7,10 +7,10 @@ import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Window;
 
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.ui.activity.BaseFragmentActivity;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.StoryFragment;
 
 /**
  * @author Dmitry Smirnov
@@ -18,6 +18,8 @@ import com.smirnov.dmitrii.questbook.ui.activity.BaseFragmentActivity;
  */
 
 public class StoryActivity extends BaseFragmentActivity {
+
+    private static final String TAG = StoryActivity.class.getSimpleName();
 
     public static void start(@NonNull Activity activity) {
         Intent intent = new Intent(activity, StoryActivity.class);
@@ -37,6 +39,6 @@ public class StoryActivity extends BaseFragmentActivity {
     @Nullable
     @Override
     protected Fragment getReplacingFragment() {
-        return null;
+        return StoryFragment.newInstance(null);
     }
 }

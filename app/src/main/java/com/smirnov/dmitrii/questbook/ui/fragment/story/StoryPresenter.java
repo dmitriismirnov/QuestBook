@@ -8,4 +8,8 @@ import ru.mvp.RxPresenter;
  */
 
 public class StoryPresenter extends RxPresenter<StoryView> {
+
+    private static final String TAG = StoryPresenter.class.getSimpleName();
+
+
 }

@@ -1,5 +1,9 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
+import android.support.annotation.NonNull;
+
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryItem;
+
 import ru.mvp.IView;
 
 /**
@@ -8,4 +12,10 @@ import ru.mvp.IView;
  */
 
 public interface StoryView extends IView {
+
+    void resetStory();
+
+    void addStoryItem(@NonNull StoryItem storyItem);
+
+
 }
