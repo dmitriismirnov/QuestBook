@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     void clickNewGame() {
         LogUtils.d(TAG, "clickNewGame");
         StoryActivity.start(this);
-        finish();
     }
 
     @OnClick(R.id.continue_game)

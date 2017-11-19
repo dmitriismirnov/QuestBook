@@ -54,7 +54,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter> i
         super.onViewCreated(view, savedInstanceState);
         mAdapter = new StoryAdapter(getContext());
         mStoryList.setAdapter(mAdapter);
-
+        getPresenter().init();
     }
 
     @Override

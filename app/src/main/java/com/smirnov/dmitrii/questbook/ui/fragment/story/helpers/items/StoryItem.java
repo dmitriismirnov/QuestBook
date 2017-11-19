@@ -14,7 +14,7 @@ public abstract class StoryItem {
     private int mType;
 
     public StoryItem(@StoryItemType int type) {
-        this.mType = mType;
+        this.mType = type;
     }
 
     public int getType() {

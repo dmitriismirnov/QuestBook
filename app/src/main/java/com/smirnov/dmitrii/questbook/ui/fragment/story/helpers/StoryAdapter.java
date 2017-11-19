@@ -72,9 +72,9 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ChapterViewHolder) {
-
+            ((ChapterViewHolder) holder).bind(getItem(position));
         } else if (holder instanceof ActionViewHolder) {
-
+            ((ActionViewHolder) holder).bind(getItem(position), position);
         } else if (holder instanceof ImageViewHolder) {
             ((ImageViewHolder) holder).bind(getItem(position));
         }

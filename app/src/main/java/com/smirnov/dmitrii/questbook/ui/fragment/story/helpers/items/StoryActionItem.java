@@ -14,9 +14,9 @@ public class StoryActionItem extends StoryItem {
     //TODO made for UI-only purposes, think about FLAGs model, create StoryActionView and refactor StoryActionItem
     private List<String> mActions;
 
-    public StoryActionItem(@NonNull String... actions) {
+    public StoryActionItem(@NonNull List<String> actions) {
         super(StoryItemType.ACTION);
-        Collections.addAll(mActions, actions);
+        mActions = actions;
     }
 
     public List<String> getActions() {
