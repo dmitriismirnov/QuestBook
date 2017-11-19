@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.smirnov.dmitrii.questbook.ui.widget.common.NavigationToolbar
+        android:id="@+id/toolbar"
         app:nt_title="@string/app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

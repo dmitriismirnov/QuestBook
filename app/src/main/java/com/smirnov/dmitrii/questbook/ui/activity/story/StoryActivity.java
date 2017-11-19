@@ -11,6 +11,9 @@ import android.support.v4.app.Fragment;
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.ui.activity.BaseFragmentActivity;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.StoryFragment;
+import com.smirnov.dmitrii.questbook.ui.widget.common.NavigationToolbar;
+
+import butterknife.BindView;
 
 /**
  * @author Dmitry Smirnov
@@ -20,6 +23,9 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.StoryFragment;
 public class StoryActivity extends BaseFragmentActivity {
 
     private static final String TAG = StoryActivity.class.getSimpleName();
+
+    @BindView(R.id.toolbar)
+    NavigationToolbar mToolbar;
 
     public static void start(@NonNull Activity activity) {
         Intent intent = new Intent(activity, StoryActivity.class);

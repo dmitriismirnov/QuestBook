@@ -10,25 +10,20 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/new_game"
-            android:layout_width="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
+            style="@style/MainScreenButton"
             android:text="NEW GAME" />
 
         <TextView
             android:id="@+id/continue_game"
-            android:layout_width="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
+            style="@style/MainScreenButton"
             android:text="CONTINUE" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

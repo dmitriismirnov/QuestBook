@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 
 public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
 
+    //TODO add listener text ends; add finish/fasten displaying text on click.
+
     private CharSequence mChars;
     private int mIndex;
     private long mDelay = 50; //default is 50 milliseconds

@@ -7,4 +7,22 @@
     <string name="btn_close">Закрыть</string>
 
     <string name="lbl_attention">Внимание...</string>
+
+
+    <string name="debug_short_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque eleifend ante, a euismod magna fermentum sodales.
+        Vivamus consectetur, magna eu mollis blandit, risus ipsum imperdiet mi, sit amet auctor elit erat ut erat. Integer ut suscipit sem. Sed dapibus urna vitae neque
+        posuere varius. Donec quis nisi hendrerit, tristique mi nec, maximus sem. Sed id diam nulla. Aenean a venenatis tortor.</string>
+
+    <string name="debug_long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque eleifend ante, a euismod magna fermentum sodales.
+        Vivamus consectetur, magna eu mollis blandit, risus ipsum imperdiet mi, sit amet auctor elit erat ut erat. Integer ut suscipit sem. Sed dapibus urna vitae neque
+        posuere varius. Donec quis nisi hendrerit, tristique mi nec, maximus sem. Sed id diam nulla. Aenean a venenatis tortor. Ut condimentum, orci at ultricies lacinia,
+        orci risus vulputate sem, pulvinar pharetra tortor neque et massa. Integer vitae magna pulvinar justo pretium suscipit.
+        Sed hendrerit pharetra purus, in tincidunt odio ullamcorper in. Maecenas accumsan ac tortor id suscipit. Sed accumsan nisl a mi luctus, et consectetur tellus dapibus.
+        Ut nec dolor laoreet, euismod libero ac, mollis ex. Sed mauris dolor, feugiat eget augue sed, cursus posuere nibh. Vivamus vitae eros commodo sem dapibus blandit
+        dapibus egestas ligula. Nam consectetur tempor lacus, vel vehicula tellus porta id.
+        Nunc luctus sem sit amet dignissim viverra. Duis non enim ullamcorper, molestie leo et, sollicitudin metus. Aliquam erat volutpat. Mauris lobortis in nisl eu venenatis.
+        Etiam quis dapibus elit. Sed eget arcu risus. Etiam at sollicitudin turpis. Duis eu tortor leo. Sed tincidunt, tortor sed tempor varius, metus lacus molestie metus,
+        non ornare mauris eros vel augue. Integer quis lectus blandit, luctus justo in, scelerisque orci. Curabitur vel diam ac nisl malesuada auctor.
+        Aliquam ornare, erat non laoreet dictum, lorem felis ultricies dolor, a venenatis dui nulla sed risus. In convallis arcu sed varius posuere. Ut dapibus pulvinar tellus.</string>
+
 </resources>

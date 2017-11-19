@@ -2,7 +2,7 @@ package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
 import android.support.annotation.NonNull;
 
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 
 import ru.mvp.IView;
 

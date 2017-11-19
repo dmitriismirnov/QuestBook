@@ -11,5 +11,7 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     private static final String TAG = StoryPresenter.class.getSimpleName();
 
+    public void init() {
 
+    }
 }

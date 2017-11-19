@@ -11,7 +11,7 @@ import android.view.View;
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.ui.fragment.BaseFragmentView;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryAdapter;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 
 import butterknife.BindView;
 
