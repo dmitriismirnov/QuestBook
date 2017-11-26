@@ -1,6 +1,9 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+
+import com.smirnov.dmitrii.questbook.R;
 
 import ru.utils.LogUtils;
 
@@ -20,5 +23,11 @@ public class StoryChaperItem extends StoryItem {
     public String getChapterText(){
         LogUtils.d("getChapterText", mChapterText);
         return mChapterText;
+    }
+
+    @LayoutRes
+    @Override
+    int getLayoutId() {
+        return R.layout.item_story_chapter;
     }
 }

@@ -1,8 +1,6 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items;
 
-import android.support.annotation.DrawableRes;
-
-import com.smirnov.dmitrii.questbook.R;
+import android.support.annotation.LayoutRes;
 
 /**
  * Created by Дмитрий on 18.11.2017.
@@ -20,4 +18,7 @@ public abstract class StoryItem {
     public int getType() {
         return mType;
     }
+
+    @LayoutRes
+    abstract int getLayoutId();
 }

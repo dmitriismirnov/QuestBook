@@ -1,6 +1,7 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items;
 
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 
 import com.smirnov.dmitrii.questbook.R;
 
@@ -56,4 +57,10 @@ public class StoryImageItem extends StoryItem {
         return R.drawable.debug_image_3;
     }
 
+
+    @LayoutRes
+    @Override
+    int getLayoutId() {
+        return R.layout.item_story_image;
+    }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
@@ -113,6 +114,12 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public void bind(StoryItem item, int position) {
             StoryActionItem actionItem = (StoryActionItem) item;
+            List<String> actionList = actionItem.getActions();
+            for (String s : actionList) {
+                TextView v = (TextView) mInflater.inflate(R.layout.item_action, null);
+                v.setText(s);
+                mActionContainer.addView(v);
+            }
         }
     }
 

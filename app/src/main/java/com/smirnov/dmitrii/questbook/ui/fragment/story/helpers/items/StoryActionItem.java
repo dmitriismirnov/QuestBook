@@ -1,6 +1,9 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+
+import com.smirnov.dmitrii.questbook.R;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,5 +24,12 @@ public class StoryActionItem extends StoryItem {
 
     public List<String> getActions() {
         return mActions;
+    }
+
+
+    @LayoutRes
+    @Override
+    int getLayoutId() {
+        return R.layout.item_story_action;
     }
 }
