@@ -7,6 +7,7 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryAction
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
+import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,5 +117,8 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         }
     }
 
+    private ActionModel getRandomActionModel(){
+        return new ActionModel(getRandomAction(), null);
+    }
 
 }

@@ -17,6 +17,7 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
     private CharSequence mChars;
     private int mIndex;
     private long mDelay = 50; //default is 50 milliseconds
+    private TextDisplayFinishListener mListener;
 
     public StoryTextView(Context context) {
         super(context);
@@ -37,6 +38,8 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
             setText(mChars.subSequence(0, mIndex++));
             if (mIndex <= mChars.length()) {
                 mHandler.postDelayed(mRunnable, mDelay);
+            } else if (mListener != null) {
+                mListener.onTextDisplayingFinished();
             }
         }
     };
@@ -50,7 +53,27 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
         mHandler.postDelayed(mRunnable, mDelay);
     }
 
+    public void displayText(String text) {
+        mHandler.removeCallbacks(mRunnable);
+        setText(text);
+        if (mListener != null) {
+            mListener.onTextDisplayingFinished();
+        }
+    }
+
+    public long getDelay() {
+        return mDelay;
+    }
+
     public void setDelay(long millis) {
-        mDelay = millis;
+        this.mDelay = millis;
+    }
+
+    public void setTextDisplayListener(TextDisplayFinishListener listener) {
+        this.mListener = listener;
+    }
+
+    public interface TextDisplayFinishListener {
+        void onTextDisplayingFinished();
     }
 }
