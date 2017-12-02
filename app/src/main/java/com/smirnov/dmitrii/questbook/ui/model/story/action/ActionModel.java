@@ -59,4 +59,8 @@ public class ActionModel {
         }
         return true;
     }
+
+    public String getName() {
+        return mName;
+    }
 }

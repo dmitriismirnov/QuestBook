@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <com.smirnov.dmitrii.questbook.ui.widget.StoryTextView
+        android:layout_margin="10dp"
         android:id="@+id/story_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

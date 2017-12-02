@@ -11,28 +11,17 @@ import com.smirnov.dmitrii.questbook.R;
 
 public class StoryImageItem extends StoryItem {
 
-    @ImageType
-    private int mImageType = ImageType.NO_IMAGE;
+    private Images mImage = Images.NO_IMAGE;
 
-    public StoryImageItem(@ImageType int imageType) {
+    public StoryImageItem(Images image) {
         super(StoryItemType.IMAGE);
-        this.mImageType = imageType;
+        this.mImage = image;
     }
 
 
     @DrawableRes
     public int getImageResourse() {
-        switch (mImageType) {
-            case ImageType.DEBUG_1:
-                return getDebugImage1();
-            case ImageType.DEBUG_2:
-                return getDebugImage2();
-            case ImageType.DEBUG_3:
-                return getDebugImage3();
-            default:
-            case ImageType.NO_IMAGE:
-                return getNoImageAvailable();
-        }
+       return mImage.getImageId();
     }
 
 

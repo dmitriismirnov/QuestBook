@@ -17,5 +17,7 @@ public interface StoryView extends IView {
 
     void addStoryItem(@NonNull StoryItem storyItem);
 
+    void removeLastItem();
 
+    void showToastMessage(@NonNull String message);
 }

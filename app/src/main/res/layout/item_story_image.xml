@@ -6,7 +6,9 @@
     <ImageView
         android:id="@+id/story_image"
         android:layout_width="match_parent"
-        android:scaleType="fitCenter"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_margin="10dp"
+        android:scaleType="fitCenter" />
 
 </FrameLayout>

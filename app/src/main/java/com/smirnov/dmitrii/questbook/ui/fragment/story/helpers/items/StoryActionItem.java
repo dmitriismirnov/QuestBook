@@ -4,6 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 
 import com.smirnov.dmitrii.questbook.R;
+import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,18 +15,16 @@ import java.util.List;
 
 public class StoryActionItem extends StoryItem {
 
-    //TODO made for UI-only purposes, think about FLAGs model, create StoryActionView and refactor StoryActionItem
-    private List<String> mActions;
+    private List<ActionModel> mActionList;
 
-    public StoryActionItem(@NonNull List<String> actions) {
+    public StoryActionItem(@NonNull List<ActionModel> actions) {
         super(StoryItemType.ACTION);
-        mActions = actions;
+        this.mActionList = actions;
     }
 
-    public List<String> getActions() {
-        return mActions;
+    public List<ActionModel> getActionList() {
+        return mActionList;
     }
-
 
     @LayoutRes
     @Override

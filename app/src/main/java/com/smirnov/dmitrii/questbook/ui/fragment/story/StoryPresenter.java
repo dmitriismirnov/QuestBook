@@ -1,13 +1,12 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
 import com.smirnov.dmitrii.questbook.R;
-import com.smirnov.dmitrii.questbook.app.App;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.ImageType;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.Images;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
+import com.smirnov.dmitrii.questbook.ui.model.story.action.FlagModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +26,25 @@ public class StoryPresenter extends RxPresenter<StoryView> {
     public void init() {
         getView().resetStory();
 
-//        for (int i = 0; i < 10; i++) {
-            getView().addStoryItem(getRandomChapterItem());
-            getView().addStoryItem(getRandomActionItem());
-            if (mRandom.nextBoolean()) {
-                getView().addStoryItem(getRandomImageItem());
-            }
-//        }
+        if (mRandom.nextBoolean()) {
+            getView().addStoryItem(getRandomImageItem());
+        }
+        getView().addStoryItem(getRandomChapterItem());
+
     }
 
+    public void processTextShown() {
+        getView().addStoryItem(getRandomActionItem());
+    }
+
+    public void processActionChosen(ActionModel model) {
+        getView().showToastMessage(model.getName());
+        getView().removeLastItem();
+        if (mRandom.nextBoolean()) {
+            getView().addStoryItem(getRandomImageItem());
+        }
+        getView().addStoryItem(getRandomChapterItem());
+    }
 
     /**
      * --------------------------------------------------------------------------------------------------------------
@@ -49,7 +58,7 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     private StoryActionItem getRandomActionItem() {
         int size = mRandom.nextInt(3) + 1;
-        List<String> actions = new ArrayList<>();
+        List<ActionModel> actions = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             actions.add(getRandomAction());
         }
@@ -60,13 +69,11 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         return new StoryImageItem(getRandomImageType());
     }
 
-    Random mRandom = new Random();
+    private Random mRandom = new Random();
 
-    @ImageType
-    private int getRandomImageType() {
-        int images[] = {ImageType.DEBUG_1, ImageType.DEBUG_2, ImageType.DEBUG_3};
-        int pos = mRandom.nextInt(images.length);
-        return images[pos];
+    private Images getRandomImageType() {
+        int pos = mRandom.nextInt(Images.values().length);
+        return Images.fromOrdinal(pos);
     }
 
     private String getRandomDebugText() {
@@ -88,37 +95,45 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         return getView().getContext().getString(R.string.debug_long_text);
     }
 
-    private String getRandomAction() {
+    private ActionModel getRandomAction() {
         int rnd = mRandom.nextInt(10);
-
+        String name;
+        List<FlagModel> flags = new ArrayList<>();
         switch (rnd) {
             case 0:
-                return "Налево";
+                name = "Налево";
+                break;
             case 1:
-                return "Вперед";
+                name = "Вперед";
+                break;
             case 2:
-                return "Направо";
+                name = "Направо";
+                break;
             case 3:
-                return "Назад";
+                name = "Назад";
+                break;
             case 4:
-                return "ДРАКА";
+                name = "ДРАКА";
+                break;
             case 5:
-                return "ОТСТУПАЮ";
+                name = "ОТСТУПАЮ";
+                break;
             case 6:
-                return "Попытка украсть деньги";
+                name = "Попытка украсть деньги";
+                break;
             case 7:
-                return "Попытка взломать замок";
+                name = "Попытка взломать замок";
+                break;
             case 8:
-                return "Использовать силу земли";
+                name = "Использовать силу земли";
+                break;
             case 9:
-                return "Лососнуть тунца";
+                name = "Лососнуть тунца";
             default:
-                return "ПОБЕДИТЬ";
+                name = "ПОБЕДИТЬ";
+                break;
         }
-    }
-
-    private ActionModel getRandomActionModel(){
-        return new ActionModel(getRandomAction(), null);
+        return new ActionModel(name, flags);
     }
 
 }

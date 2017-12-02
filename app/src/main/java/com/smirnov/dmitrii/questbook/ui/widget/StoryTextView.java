@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
+
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayFinishListener;
 
 /**
  * @author Dmitry Smirnov
@@ -12,37 +15,39 @@ import android.util.AttributeSet;
 
 public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
 
-    //TODO add listener text ends; add finish/fasten displaying text on click.
-
     private CharSequence mChars;
     private int mIndex;
     private long mDelay = 50; //default is 50 milliseconds
     private TextDisplayFinishListener mListener;
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable;
 
     public StoryTextView(Context context) {
         super(context);
+        init();
     }
 
     public StoryTextView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public StoryTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
-    private Handler mHandler = new Handler();
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
+    private void init() {
+        mRunnable = () -> {
             setText(mChars.subSequence(0, mIndex++));
             if (mIndex <= mChars.length()) {
                 mHandler.postDelayed(mRunnable, mDelay);
             } else if (mListener != null) {
                 mListener.onTextDisplayingFinished();
             }
-        }
-    };
+        };
+    }
+
 
     public void displayTextWithAnimation(CharSequence txt) {
         mChars = txt;
@@ -53,9 +58,9 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
         mHandler.postDelayed(mRunnable, mDelay);
     }
 
-    public void displayText(String text) {
+    public void finishDisplaying() {
         mHandler.removeCallbacks(mRunnable);
-        setText(text);
+        setText(mChars);
         if (mListener != null) {
             mListener.onTextDisplayingFinished();
         }
@@ -73,7 +78,4 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
         this.mListener = listener;
     }
 
-    public interface TextDisplayFinishListener {
-        void onTextDisplayingFinished();
-    }
 }

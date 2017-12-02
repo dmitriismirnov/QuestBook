@@ -2,6 +2,7 @@ package com.smirnov.dmitrii.questbook.ui.fragment.story.helpers;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaper
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItemType;
+import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.widget.StoryTextView;
 
 import java.util.ArrayList;
@@ -23,13 +25,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.utils.LogUtils;
 
 /**
- * Created by Дмитрий on 18.11.2017.
+ * @author Дмитрий
+ * @version 18.11.2017.
  */
 
 public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String TAG = StoryAdapter.class.getSimpleName();
+
+    private TextDisplayFinishListener mTextDisplayListener;
+    private UserInteractionListener mUserInteractionListener;
     private List<StoryItem> mItems = new ArrayList<>();
     private final LayoutInflater mInflater;
 
@@ -37,9 +45,27 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.mInflater = LayoutInflater.from(context);
     }
 
+    public void setTextDisplayFinishListener(@Nullable TextDisplayFinishListener listener) {
+        this.mTextDisplayListener = listener;
+    }
+
+    public void setUserInteractionListener(@Nullable UserInteractionListener listener) {
+        this.mUserInteractionListener = listener;
+    }
+
     public void addItem(@NonNull StoryItem item) {
         mItems.add(item);
         notifyItemInserted(getItemCount());
+    }
+
+    public void removeItem(int index) {
+        if (index < 0 || index >= getItemCount()) {
+            LogUtils.d(TAG, "impossible index: " + index);
+            return;
+        }
+
+        mItems.remove(index);
+        notifyItemRemoved(index);
     }
 
     public void removeAllItems() {
@@ -73,7 +99,11 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ChapterViewHolder) {
-            ((ChapterViewHolder) holder).bind(getItem(position));
+            if (position + 1 == getItemCount()) {
+                ((ChapterViewHolder) holder).bind(getItem(position));
+            } else {
+                ((ChapterViewHolder) holder).rebind(getItem(position));
+            }
         } else if (holder instanceof ActionViewHolder) {
             ((ActionViewHolder) holder).bind(getItem(position), position);
         } else if (holder instanceof ImageViewHolder) {
@@ -91,14 +121,32 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.story_text)
         StoryTextView mChapterView;
 
-        public ChapterViewHolder(View itemView) {
+        ChapterViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(StoryItem item) {
+        void bind(StoryItem item) {
             StoryChaperItem chaperItem = (StoryChaperItem) item;
             mChapterView.displayTextWithAnimation(chaperItem.getChapterText());
+            mChapterView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mChapterView.finishDisplaying();
+                    mChapterView.setTextDisplayListener(null);
+                }
+            });
+            mChapterView.setTextDisplayListener(() -> {
+                if (mTextDisplayListener != null) {
+                    mTextDisplayListener.onTextDisplayingFinished();
+                }
+                mChapterView.setTextDisplayListener(null);
+            });
+        }
+
+        void rebind(StoryItem item) {
+            StoryChaperItem chaperItem = (StoryChaperItem) item;
+            mChapterView.setText(chaperItem.getChapterText());
         }
     }
 
@@ -107,17 +155,24 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.story_action_container)
         LinearLayout mActionContainer;
 
-        public ActionViewHolder(View itemView) {
+        ActionViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(StoryItem item, int position) {
+        void bind(StoryItem item, int position) {
             StoryActionItem actionItem = (StoryActionItem) item;
-            List<String> actionList = actionItem.getActions();
-            for (String s : actionList) {
+            List<ActionModel> actionList = actionItem.getActionList();
+            for (int i = 0; i < actionList.size(); i++) {
+                final int index = i;
+                String s = actionList.get(i).getName();
                 TextView v = (TextView) mInflater.inflate(R.layout.item_action, null);
                 v.setText(s);
+                v.setOnClickListener(v1 -> {
+                    if (mUserInteractionListener != null) {
+                        mUserInteractionListener.onChooseAction(actionItem.getActionList().get(index));
+                    }
+                });
                 mActionContainer.addView(v);
             }
         }
@@ -128,12 +183,12 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.story_image)
         ImageView mImage;
 
-        public ImageViewHolder(View itemView) {
+        ImageViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(StoryItem item) {
+        void bind(StoryItem item) {
             if (item instanceof StoryImageItem) {
                 mImage.setImageResource(((StoryImageItem) item).getImageResourse());
             }
