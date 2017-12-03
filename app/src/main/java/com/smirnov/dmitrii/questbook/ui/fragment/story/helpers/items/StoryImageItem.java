@@ -18,6 +18,9 @@ public class StoryImageItem extends StoryItem {
         this.mImage = image;
     }
 
+    public Images getImage() {
+        return mImage;
+    }
 
     @DrawableRes
     public int getImageResourse() {

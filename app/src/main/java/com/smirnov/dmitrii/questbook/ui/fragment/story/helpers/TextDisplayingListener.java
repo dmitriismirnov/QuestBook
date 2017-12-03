@@ -5,6 +5,10 @@ package com.smirnov.dmitrii.questbook.ui.fragment.story.helpers;
  * @version 02.12.2017.
  */
 
-public interface TextDisplayFinishListener {
+public interface TextDisplayingListener {
+
     void onTextDisplayingFinished();
+
+    void onViewSizeChanged();
+
 }

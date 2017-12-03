@@ -4,9 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayFinishListener;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
+
+import ru.utils.LogUtils;
 
 /**
  * @author Dmitry Smirnov
@@ -15,10 +16,12 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayFinish
 
 public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
 
+    private final static String TAG = StoryTextView.class.getSimpleName();
+
     private CharSequence mChars;
     private int mIndex;
     private long mDelay = 50; //default is 50 milliseconds
-    private TextDisplayFinishListener mListener;
+    private TextDisplayingListener mListener;
     private Handler mHandler = new Handler();
     private Runnable mRunnable;
 
@@ -48,6 +51,15 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
         };
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        if (mListener != null) {
+            mListener.onViewSizeChanged();
+        }
+
+    }
 
     public void displayTextWithAnimation(CharSequence txt) {
         mChars = txt;
@@ -74,7 +86,7 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
         this.mDelay = millis;
     }
 
-    public void setTextDisplayListener(TextDisplayFinishListener listener) {
+    public void setTextDisplayListener(TextDisplayingListener listener) {
         this.mListener = listener;
     }
 

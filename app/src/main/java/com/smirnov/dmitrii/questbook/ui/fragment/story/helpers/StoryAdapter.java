@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smirnov.dmitrii.questbook.R;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.Images;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
@@ -36,7 +37,7 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private static final String TAG = StoryAdapter.class.getSimpleName();
 
-    private TextDisplayFinishListener mTextDisplayListener;
+    private TextDisplayingListener mTextDisplayListener;
     private UserInteractionListener mUserInteractionListener;
     private List<StoryItem> mItems = new ArrayList<>();
     private final LayoutInflater mInflater;
@@ -45,7 +46,7 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.mInflater = LayoutInflater.from(context);
     }
 
-    public void setTextDisplayFinishListener(@Nullable TextDisplayFinishListener listener) {
+    public void setTextDisplayFinishListener(@Nullable TextDisplayingListener listener) {
         this.mTextDisplayListener = listener;
     }
 
@@ -129,18 +130,23 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         void bind(StoryItem item) {
             StoryChaperItem chaperItem = (StoryChaperItem) item;
             mChapterView.displayTextWithAnimation(chaperItem.getChapterText());
-            mChapterView.setOnClickListener(new View.OnClickListener() {
+            mChapterView.setOnClickListener(v -> {
+                mChapterView.finishDisplaying();
+                mChapterView.setTextDisplayListener(null);
+            });
+            mChapterView.setTextDisplayListener(new TextDisplayingListener() {
                 @Override
-                public void onClick(View v) {
-                    mChapterView.finishDisplaying();
+                public void onTextDisplayingFinished() {
+                    if (mTextDisplayListener != null) {
+                        mTextDisplayListener.onTextDisplayingFinished();
+                    }
                     mChapterView.setTextDisplayListener(null);
                 }
-            });
-            mChapterView.setTextDisplayListener(() -> {
-                if (mTextDisplayListener != null) {
-                    mTextDisplayListener.onTextDisplayingFinished();
+
+                @Override
+                public void onViewSizeChanged() {
+                    mTextDisplayListener.onViewSizeChanged();
                 }
-                mChapterView.setTextDisplayListener(null);
             });
         }
 
@@ -161,6 +167,7 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         void bind(StoryItem item, int position) {
+            mActionContainer.removeAllViewsInLayout();
             StoryActionItem actionItem = (StoryActionItem) item;
             List<ActionModel> actionList = actionItem.getActionList();
             for (int i = 0; i < actionList.size(); i++) {
@@ -190,7 +197,9 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         void bind(StoryItem item) {
             if (item instanceof StoryImageItem) {
-                mImage.setImageResource(((StoryImageItem) item).getImageResourse());
+//                if (((StoryImageItem) item).getImage() != Images.NO_IMAGE) {
+                    mImage.setImageResource(((StoryImageItem) item).getImageResourse());
+//                }
             }
         }
     }

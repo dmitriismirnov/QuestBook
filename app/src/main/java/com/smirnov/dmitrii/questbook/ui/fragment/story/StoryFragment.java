@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.ui.fragment.BaseFragmentView;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryAdapter;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayFinishListener;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.UserInteractionListener;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
@@ -26,7 +26,7 @@ import butterknife.BindView;
 
 public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         implements StoryView,
-        TextDisplayFinishListener,
+        TextDisplayingListener,
         UserInteractionListener {
 
     private static final String TAG = StoryFragment.class.getSimpleName();
@@ -100,10 +100,20 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @Override
     public void onTextDisplayingFinished() {
         getPresenter().processTextShown();
+        scrollToEnd();
+    }
+
+    @Override
+    public void onViewSizeChanged() {
+        scrollToEnd();
     }
 
     @Override
     public void onChooseAction(@NonNull ActionModel action) {
         getPresenter().processActionChosen(action);
+    }
+
+    private void scrollToEnd() {
+        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
     }
 }
