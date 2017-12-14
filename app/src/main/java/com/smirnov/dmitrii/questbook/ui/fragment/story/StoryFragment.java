@@ -85,6 +85,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @Override
     public void addStoryItem(@NonNull StoryItem storyItem) {
         mAdapter.addItem(storyItem);
+        scrollToEnd();
     }
 
     @Override
@@ -113,7 +114,8 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         getPresenter().processActionChosen(action);
     }
 
-    private void scrollToEnd() {
+    @Override
+    public void scrollToEnd() {
         mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
     }
 }

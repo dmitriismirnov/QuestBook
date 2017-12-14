@@ -20,4 +20,6 @@ public interface StoryView extends IView {
     void removeLastItem();
 
     void showToastMessage(@NonNull String message);
+
+    void scrollToEnd();
 }
