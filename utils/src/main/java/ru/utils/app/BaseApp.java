@@ -9,10 +9,6 @@ import android.support.multidex.BuildConfig;
 import android.support.multidex.MultiDexApplication;
 
 
-/**
- * a
- * Created by deler on 18.08.16.
- */
 public class BaseApp extends MultiDexApplication {
 
     private static BaseApp sInstance;

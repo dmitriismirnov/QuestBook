@@ -21,7 +21,6 @@ public class StoryChaperItem extends StoryItem {
     }
 
     public String getChapterText(){
-        LogUtils.d("getChapterText", mChapterText);
         return mChapterText;
     }
 
