@@ -28,12 +28,12 @@ public class StoryPresenter extends RxPresenter<StoryView> {
     }
 
     public void processTextShown() {
-        getView().addStoryItem(Generator.getRandomActionItem());
+        getView().setUserAction(Generator.getRandomActionItem());
     }
 
     public void processActionChosen(ActionModel model) {
         getView().showToastMessage(model.getName());
-        getView().removeLastItem();
+        getView().hideUserAction();
         if (mRandom.nextBoolean()) {
             getView().addStoryItem(Generator.getRandomImageItem());
         }

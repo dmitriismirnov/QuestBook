@@ -1,6 +1,7 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,8 +15,10 @@ import com.smirnov.dmitrii.questbook.ui.fragment.BaseFragmentView;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryAdapter;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.UserInteractionListener;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
+import com.smirnov.dmitrii.questbook.ui.widget.StoryUserActionView;
 
 import butterknife.BindView;
 
@@ -33,6 +36,8 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @BindView(R.id.recycler_view)
     RecyclerView mStoryList;
+    @BindView(R.id.user_action_view)
+    StoryUserActionView mActionView;
 
     private StoryAdapter mAdapter;
 
@@ -67,13 +72,15 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     public void onResume() {
         super.onResume();
         mAdapter.setTextDisplayFinishListener(this);
-        mAdapter.setUserInteractionListener(this);
+        mActionView.setUserInteractionListener(this);
+//        mAdapter.setUserInteractionListener(this);
     }
 
     @Override
     public void onPause() {
         mAdapter.setTextDisplayFinishListener(null);
-        mAdapter.setUserInteractionListener(null);
+        mActionView.setUserInteractionListener(null);
+//        mAdapter.setUserInteractionListener(null);
         super.onPause();
     }
 
@@ -89,6 +96,28 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     }
 
     @Override
+    public void setUserAction(@Nullable StoryActionItem actionItem) {
+        if (actionItem == null) {
+            mActionView.hide();
+            mActionView.clear();
+        } else {
+            mActionView.setUpActionItem(actionItem);
+            mActionView.show();
+        }
+
+    }
+
+    @Override
+    public void showUserAction() {
+        mActionView.show();
+    }
+
+    @Override
+    public void hideUserAction() {
+        mActionView.hide();
+    }
+
+    @Override
     public void removeLastItem() {
         mAdapter.removeItem(mAdapter.getItemCount() - 1);
     }
@@ -100,6 +129,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @Override
     public void onTextDisplayingFinished() {
+        scrollToEnd();
         getPresenter().processTextShown();
         scrollToEnd();
     }
@@ -116,6 +146,14 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @Override
     public void scrollToEnd() {
-        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+        //todo looks like i need both methods - scrollToEnd & scrollToEndDelayed
+        new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), 300);
+//        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+    }
+
+
+
+    public static int getTargetScrollPosition(@NonNull RecyclerView view) {
+        return view.computeVerticalScrollRange() - view.computeVerticalScrollOffset();
     }
 }
