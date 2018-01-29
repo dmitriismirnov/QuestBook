@@ -129,6 +129,7 @@ public class StoryPresenter extends RxPresenter<StoryView> {
                 break;
             case 9:
                 name = "Лососнуть тунца";
+                break;
             default:
                 name = "ПОБЕДИТЬ";
                 break;
