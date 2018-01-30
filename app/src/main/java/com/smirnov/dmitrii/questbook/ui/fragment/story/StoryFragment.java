@@ -1,5 +1,6 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.smirnov.dmitrii.questbook.R;
+import com.smirnov.dmitrii.questbook.app.App;
 import com.smirnov.dmitrii.questbook.ui.fragment.BaseFragmentView;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryAdapter;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
@@ -20,7 +22,11 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.widget.StoryUserActionView;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import butterknife.BindView;
+import ru.utils.LogUtils;
 
 /**
  * @author Dmitry Smirnov
@@ -34,6 +40,8 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @SuppressWarnings("unused")
     private static final String TAG = StoryFragment.class.getSimpleName();
+
+    private static final String PATH_TESTBOOK = "books/testbook/exsample.json";
 
     @BindView(R.id.recycler_view)
     RecyclerView mStoryList;
@@ -151,9 +159,28 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), 300);
     }
 
-
-
     public static int getTargetScrollPosition(@NonNull RecyclerView view) {
         return view.computeVerticalScrollRange() - view.computeVerticalScrollOffset();
+    }
+
+
+    public static String loadAsset(String path) {
+        //TODO: move to CommonUtils
+        AssetManager manager = App.context().getAssets();
+        String content = null;
+
+        try {
+            InputStream e = manager.open(path);
+            if (e != null) {
+                byte[] buffer = new byte[e.available()];
+                e.read(buffer);
+                e.close();
+                content = new String(buffer);
+            }
+        } catch (IOException var5) {
+            LogUtils.w(TAG, var5);
+        }
+
+        return content;
     }
 }
