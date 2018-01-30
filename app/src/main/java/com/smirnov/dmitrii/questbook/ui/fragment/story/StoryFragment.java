@@ -148,9 +148,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     }
     @Override
     public void scrollDownDelayed() {
-        //todo looks like i need both methods - scrollToEnd & scrollToEndDelayed
         new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), 300);
-//        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
     }
 
 
