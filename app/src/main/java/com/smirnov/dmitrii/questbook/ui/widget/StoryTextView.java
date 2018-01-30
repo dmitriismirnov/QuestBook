@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
 
-import ru.utils.LogUtils;
-
 /**
  * @author Dmitry Smirnov
  * @version 14.11.2017.
@@ -71,11 +69,15 @@ public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
     }
 
     public void finishDisplaying() {
-        mHandler.removeCallbacks(mRunnable);
+        removeCallbacks();
         setText(mChars);
         if (mListener != null) {
             mListener.onTextDisplayingFinished();
         }
+    }
+
+    public void removeCallbacks() {
+        mHandler.removeCallbacks(mRunnable);
     }
 
     public long getDelay() {

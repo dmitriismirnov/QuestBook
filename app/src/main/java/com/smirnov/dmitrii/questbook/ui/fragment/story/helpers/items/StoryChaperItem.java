@@ -29,4 +29,11 @@ public class StoryChaperItem extends StoryItem {
     int getLayoutId() {
         return R.layout.item_story_chapter;
     }
+
+    @Override
+    public String toString() {
+        return "StoryChaperItem{" +
+                "ChapterText='" + mChapterText + '\'' +
+                '}';
+    }
 }

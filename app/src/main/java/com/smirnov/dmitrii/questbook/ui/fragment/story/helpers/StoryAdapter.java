@@ -15,8 +15,8 @@ import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.Images;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItemType;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.widget.StoryTextView;
@@ -101,8 +101,10 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ChapterViewHolder) {
             if (position + 1 == getItemCount()) {
+                LogUtils.d(TAG, "bind last item#" + position + ": " + getItem(position).toString());
                 ((ChapterViewHolder) holder).bind(getItem(position));
             } else {
+                LogUtils.d(TAG, "REbind item#" + position + ": " + getItem(position).toString());
                 ((ChapterViewHolder) holder).rebind(getItem(position));
             }
         } else if (holder instanceof ActionViewHolder) {
@@ -132,7 +134,7 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mChapterView.displayTextWithAnimation(chaperItem.getChapterText());
             mChapterView.setOnClickListener(v -> {
                 mChapterView.finishDisplaying();
-                mChapterView.setTextDisplayListener(null);
+//                mChapterView.setTextDisplayListener(null);
             });
             mChapterView.setTextDisplayListener(new TextDisplayingListener() {
                 @Override
@@ -152,10 +154,12 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         void rebind(StoryItem item) {
             StoryChaperItem chaperItem = (StoryChaperItem) item;
+            mChapterView.removeCallbacks();
             mChapterView.setText(chaperItem.getChapterText());
         }
     }
 
+    @Deprecated
     class ActionViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.story_action_container)
@@ -197,9 +201,9 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         void bind(StoryItem item) {
             if (item instanceof StoryImageItem) {
-//                if (((StoryImageItem) item).getImage() != Images.NO_IMAGE) {
+                if (((StoryImageItem) item).getImage() != Images.NO_IMAGE) {
                     mImage.setImageResource(((StoryImageItem) item).getImageResourse());
-//                }
+                }
             }
         }
     }
