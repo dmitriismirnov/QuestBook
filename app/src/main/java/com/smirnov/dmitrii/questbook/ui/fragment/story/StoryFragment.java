@@ -32,6 +32,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         TextDisplayingListener,
         UserInteractionListener {
 
+    @SuppressWarnings("unused")
     private static final String TAG = StoryFragment.class.getSimpleName();
 
     @BindView(R.id.recycler_view)
@@ -41,6 +42,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     private StoryAdapter mAdapter;
 
+    @SuppressWarnings("SameParameterValue")
     @NonNull
     public static Fragment newInstance(@Nullable Bundle extras) {
         Fragment fragment = new StoryFragment();
@@ -92,18 +94,14 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @Override
     public void addStoryItem(@NonNull StoryItem storyItem) {
         mAdapter.addItem(storyItem);
-        scrollToEnd();
+        scrollDownDelayed();
     }
 
     @Override
-    public void setUserAction(@Nullable StoryActionItem actionItem) {
-        if (actionItem == null) {
-            mActionView.hide();
-            mActionView.clear();
-        } else {
-            mActionView.setUpActionItem(actionItem);
-            mActionView.show();
-        }
+    public void setUserAction(@NonNull StoryActionItem actionItem) {
+        mActionView.clear();
+        mActionView.setUpActionItem(actionItem);
+        mActionView.show();
 
     }
 
@@ -129,14 +127,14 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @Override
     public void onTextDisplayingFinished() {
-        scrollToEnd();
         getPresenter().processTextShown();
-        scrollToEnd();
+        scrollDown();
+        scrollDownDelayed();
     }
 
     @Override
     public void onViewSizeChanged() {
-        scrollToEnd();
+        scrollDown();
     }
 
     @Override
@@ -145,7 +143,11 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     }
 
     @Override
-    public void scrollToEnd() {
+    public void scrollDown() {
+        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+    }
+    @Override
+    public void scrollDownDelayed() {
         //todo looks like i need both methods - scrollToEnd & scrollToEndDelayed
         new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), 300);
 //        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);

@@ -69,7 +69,7 @@ public class StoryUserActionView extends LinearLayout {
     }
 
     public void setUpActionItem(@NonNull StoryActionItem actionItem) {
-        clear();
+//        clear();
         List<ActionModel> actionList = actionItem.getActionList();
         for (int i = 0; i < actionList.size(); i++) {
             mActionContainer.addView(getSingleActionItemView(actionList.get(i)));
@@ -85,21 +85,23 @@ public class StoryUserActionView extends LinearLayout {
     }
 
     public void hide() {
-        AnimUtils.animateViewWithBasicCallback(mActionContainer, R.anim.slide_out_to_bottom, new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
+        AnimUtils.animateViewHide(mActionContainer, R.anim.slide_out_to_bottom);
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mActionContainer.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
+//        AnimUtils.animateViewWithBasicCallback(mActionContainer, R.anim.slide_out_to_bottom, new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                mActionContainer.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//
+//            }
+//        });
     }
 
     @NonNull

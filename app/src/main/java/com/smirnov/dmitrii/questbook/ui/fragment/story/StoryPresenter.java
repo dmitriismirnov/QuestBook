@@ -16,6 +16,7 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     private static final String TAG = StoryPresenter.class.getSimpleName();
     private Random mRandom = new Random();
+    private static final int KEYBOARD_DISPLAY_DELAY = 300;
 
     public void init() {
         getView().resetStory();

@@ -19,7 +19,7 @@ public interface StoryView extends IView {
 
     void addStoryItem(@NonNull StoryItem storyItem);
 
-    void setUserAction(@Nullable StoryActionItem actionItem);
+    void setUserAction(@NonNull StoryActionItem actionItem);
 
     void showUserAction();
 
@@ -29,5 +29,7 @@ public interface StoryView extends IView {
 
     void showToastMessage(@NonNull String message);
 
-    void scrollToEnd();
+    void scrollDown();
+
+    void scrollDownDelayed();
 }
