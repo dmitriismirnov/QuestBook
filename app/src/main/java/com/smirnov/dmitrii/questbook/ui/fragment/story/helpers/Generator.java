@@ -100,6 +100,6 @@ public class Generator {
                 name = "ПОБЕДИТЬ";
                 break;
         }
-        return new ActionModel(name, flags);
+        return new ActionModel(name, flags, rnd + ".json");
     }
 }

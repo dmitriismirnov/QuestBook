@@ -1,11 +1,17 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.Generator;
+import android.support.annotation.NonNull;
+
+import com.smirnov.dmitrii.questbook.app.utils.CommonUtils;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
+import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 
 import java.util.Random;
 
 import ru.mvp.RxPresenter;
+import ru.utils.data.GsonUtils;
 
 /**
  * @author Dmitry Smirnov
@@ -15,30 +21,39 @@ import ru.mvp.RxPresenter;
 public class StoryPresenter extends RxPresenter<StoryView> {
 
     private static final String TAG = StoryPresenter.class.getSimpleName();
+
     private Random mRandom = new Random();
-    private static final int KEYBOARD_DISPLAY_DELAY = 300;
+
+    private static final String FIRST_CHAPTER = "1.json";
+    private static final String PATH_TESTBOOK_DIR = "books/testbook/";
+
+    private StoryModel mCurrentStoryModel;
 
     public void init() {
         getView().resetStory();
 
-        if (mRandom.nextBoolean()) {
-            getView().addStoryItem(Generator.getRandomImageItem());
-        }
-        getView().addStoryItem(Generator.getRandomChapterItem());
-
+        processChapter(FIRST_CHAPTER);
     }
 
     public void processTextShown() {
-        getView().setUserAction(Generator.getRandomActionItem());
+        getView().setUserAction(new StoryActionItem(mCurrentStoryModel.getActions()));
     }
 
-    public void processActionChosen(ActionModel model) {
-        getView().showToastMessage(model.getName());
+    public void processActionChosen(@NonNull ActionModel model) {
+        getView().showToastMessage(model.getNextChapter());
         getView().hideUserAction();
-        if (mRandom.nextBoolean()) {
-            getView().addStoryItem(Generator.getRandomImageItem());
-        }
-        getView().addStoryItem(Generator.getRandomChapterItem());
+        processChapter(model.getNextChapter());
+    }
+
+    void processChapter(@NonNull String chapterName) {
+        String jsonStr = CommonUtils.loadAsset(getBookPath() + chapterName);
+        mCurrentStoryModel = GsonUtils.fromJson(jsonStr, StoryModel.class);
+
+        getView().addStoryItem(new StoryChaperItem(mCurrentStoryModel.getText()));
+    }
+
+    private String getBookPath() {
+        return PATH_TESTBOOK_DIR;
     }
 
 }

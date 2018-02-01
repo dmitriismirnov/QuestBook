@@ -164,23 +164,4 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     }
 
 
-    public static String loadAsset(String path) {
-        //TODO: move to CommonUtils
-        AssetManager manager = App.context().getAssets();
-        String content = null;
-
-        try {
-            InputStream e = manager.open(path);
-            if (e != null) {
-                byte[] buffer = new byte[e.available()];
-                e.read(buffer);
-                e.close();
-                content = new String(buffer);
-            }
-        } catch (IOException var5) {
-            LogUtils.w(TAG, var5);
-        }
-
-        return content;
-    }
 }

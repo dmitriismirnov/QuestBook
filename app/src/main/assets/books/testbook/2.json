@@ -1,0 +1,16 @@
+{
+  "actions": [
+    {
+      "name":"action1",
+      "flags":[],
+      "next":"1.json"
+    },
+    {
+      "name":"action3",
+      "flags":[],
+      "next":"3.json"
+    }
+  ],
+
+  "text": "chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 chapter2 "
+}

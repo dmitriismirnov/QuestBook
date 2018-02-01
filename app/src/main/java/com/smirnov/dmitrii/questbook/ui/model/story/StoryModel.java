@@ -1,5 +1,6 @@
 package com.smirnov.dmitrii.questbook.ui.model.story;
 
+import com.google.gson.annotations.SerializedName;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 
 import java.util.List;
@@ -17,6 +18,19 @@ public class StoryModel {
      * ACTION part with possible actions, flags and links to next chapter
      */
 
+    @SerializedName("text")
     private String mText;
+    @SerializedName("actions")
     private List<ActionModel> mActions;
+
+    public StoryModel() {
+    }
+
+    public String getText() {
+        return mText;
+    }
+
+    public List<ActionModel> getActions() {
+        return mActions;
+    }
 }
