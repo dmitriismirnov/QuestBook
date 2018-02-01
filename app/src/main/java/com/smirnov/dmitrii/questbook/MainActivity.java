@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.smirnov.dmitrii.questbook.app.books.Books;
 import com.smirnov.dmitrii.questbook.ui.activity.story.StoryActivity;
 
 import butterknife.BindView;
@@ -27,13 +28,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.new_game)
-    void clickNewGame() {
-        LogUtils.d(TAG, "clickNewGame");
-        StoryActivity.start(this);
+    void clickNewKonanGame() {
+        StoryActivity.start(this, Books.KONAN);
+    }
+
+    @OnClick(R.id.test_game)
+    void clickTestGame() {
+        StoryActivity.start(this, Books.TEST);
     }
 
     @OnClick(R.id.continue_game)
     void clickContinue() {
-        LogUtils.d(TAG, "clickContinue");
+        StoryActivity.load(this);
     }
 }

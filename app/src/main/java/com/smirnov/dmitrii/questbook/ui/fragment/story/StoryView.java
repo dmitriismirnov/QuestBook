@@ -3,8 +3,10 @@ package com.smirnov.dmitrii.questbook.ui.fragment.story;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.smirnov.dmitrii.questbook.app.books.Books;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
+import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 
 import ru.mvp.IView;
 
@@ -32,4 +34,12 @@ public interface StoryView extends IView {
     void scrollDown();
 
     void scrollDownDelayed();
+
+    @NonNull
+    Books getCurrentBook();
+
+    @NonNull
+    StoryModel getCurrentChapter();
+
+    void setCurrentChapter(@NonNull StoryModel storyModel);
 }

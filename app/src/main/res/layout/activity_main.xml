@@ -16,7 +16,12 @@
         <TextView
             android:id="@+id/new_game"
             style="@style/MainScreenButton"
-            android:text="NEW GAME" />
+            android:text="@string/konan_bookname" />
+
+        <TextView
+            android:id="@+id/test_game"
+            style="@style/MainScreenButton"
+            android:text="test" />
 
         <TextView
             android:id="@+id/continue_game"

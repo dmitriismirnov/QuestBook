@@ -1,6 +1,5 @@
 package com.smirnov.dmitrii.questbook.ui.fragment.story;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
@@ -12,21 +11,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.smirnov.dmitrii.questbook.R;
-import com.smirnov.dmitrii.questbook.app.App;
+import com.smirnov.dmitrii.questbook.app.books.Books;
 import com.smirnov.dmitrii.questbook.ui.fragment.BaseFragmentView;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryAdapter;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.UserInteractionListener;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
+import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.widget.StoryUserActionView;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import butterknife.BindView;
-import ru.utils.LogUtils;
 
 /**
  * @author Dmitry Smirnov
@@ -41,7 +37,8 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @SuppressWarnings("unused")
     private static final String TAG = StoryFragment.class.getSimpleName();
 
-    private static final String PATH_TESTBOOK = "books/testbook/exsample.json";
+    private static final String EXTRA_BOOK_TYPE = "book-type";
+    private static final String EXTRA_CONTINUE = "is-continue";
 
     @BindView(R.id.recycler_view)
     RecyclerView mStoryList;
@@ -49,12 +46,13 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     StoryUserActionView mActionView;
 
     private StoryAdapter mAdapter;
+    private StoryModel mCurrentStoryModel;
+    private Books mCurrentBook;
 
-    @SuppressWarnings("SameParameterValue")
     @NonNull
-    public static Fragment newInstance(@Nullable Bundle extras) {
+    public static Fragment newInstance(@NonNull Bundle extras) {
         Fragment fragment = new StoryFragment();
-        fragment.setArguments(extras == null ? new Bundle() : extras);
+        fragment.setArguments(extras);
         return fragment;
     }
 
@@ -75,6 +73,11 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         super.onViewCreated(view, savedInstanceState);
         mAdapter = new StoryAdapter(getContext());
         mStoryList.setAdapter(mAdapter);
+        mCurrentBook = (Books) getArguments().getSerializable(EXTRA_BOOK_TYPE);
+
+        //TODO impl continuing
+        boolean isContinued = getArguments().getBoolean(EXTRA_CONTINUE, false);
+
         getPresenter().init();
     }
 
@@ -154,9 +157,27 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     public void scrollDown() {
         mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
     }
+
     @Override
     public void scrollDownDelayed() {
         new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), 300);
+    }
+
+    @NonNull
+    @Override
+    public Books getCurrentBook() {
+        return mCurrentBook;
+    }
+
+    @NonNull
+    @Override
+    public StoryModel getCurrentChapter() {
+        return mCurrentStoryModel;
+    }
+
+    @Override
+    public void setCurrentChapter(@NonNull StoryModel storyModel) {
+        mCurrentStoryModel = storyModel;
     }
 
     public static int getTargetScrollPosition(@NonNull RecyclerView view) {

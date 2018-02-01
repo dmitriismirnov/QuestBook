@@ -24,19 +24,16 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     private Random mRandom = new Random();
 
-    private static final String FIRST_CHAPTER = "1.json";
-    private static final String PATH_TESTBOOK_DIR = "books/testbook/";
-
-    private StoryModel mCurrentStoryModel;
-
     public void init() {
         getView().resetStory();
 
-        processChapter(FIRST_CHAPTER);
+        processChapter(getView().getCurrentBook().getFirstChapter());
     }
 
     public void processTextShown() {
-        getView().setUserAction(new StoryActionItem(mCurrentStoryModel.getActions()));
+        getView().setUserAction(
+                new StoryActionItem(
+                        getView().getCurrentChapter().getActions()));
     }
 
     public void processActionChosen(@NonNull ActionModel model) {
@@ -47,13 +44,17 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     void processChapter(@NonNull String chapterName) {
         String jsonStr = CommonUtils.loadAsset(getBookPath() + chapterName);
-        mCurrentStoryModel = GsonUtils.fromJson(jsonStr, StoryModel.class);
+        StoryModel newChapter = GsonUtils.fromJson(jsonStr, StoryModel.class);
 
-        getView().addStoryItem(new StoryChaperItem(mCurrentStoryModel.getText()));
+        getView().setCurrentChapter(newChapter);
+
+        getView().addStoryItem(
+                new StoryChaperItem(
+                        getView().getCurrentChapter().getText()));
     }
 
     private String getBookPath() {
-        return PATH_TESTBOOK_DIR;
+        return getView().getCurrentBook().getBookPath();
     }
 
 }
