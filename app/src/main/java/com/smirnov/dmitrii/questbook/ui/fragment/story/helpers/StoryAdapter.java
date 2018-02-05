@@ -147,7 +147,9 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 @Override
                 public void onViewSizeChanged() {
-                    mTextDisplayListener.onViewSizeChanged();
+                    if (mTextDisplayListener != null) {
+                        mTextDisplayListener.onViewSizeChanged();
+                    }
                 }
             });
         }

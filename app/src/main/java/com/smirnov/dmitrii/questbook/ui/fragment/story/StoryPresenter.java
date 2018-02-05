@@ -22,8 +22,6 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     private static final String TAG = StoryPresenter.class.getSimpleName();
 
-    private Random mRandom = new Random();
-
     public void init() {
         getView().resetStory();
 
