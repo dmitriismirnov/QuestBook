@@ -8,8 +8,6 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaper
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 
-import java.util.Random;
-
 import ru.mvp.RxPresenter;
 import ru.utils.data.GsonUtils;
 
@@ -44,11 +42,15 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         String jsonStr = CommonUtils.loadAsset(getBookPath() + chapterName);
         StoryModel newChapter = GsonUtils.fromJson(jsonStr, StoryModel.class);
 
-        getView().setCurrentChapter(newChapter);
-
-        getView().addStoryItem(
-                new StoryChaperItem(
-                        getView().getCurrentChapter().getText()));
+        if (newChapter != null) {
+            getView().setCurrentChapter(newChapter);
+            getView().addStoryItem(
+                    new StoryChaperItem(
+                            getView().getCurrentChapter().getText()));
+        } else {
+            getView().showToastMessage("chapter is missing\nrestarting book");
+            processChapter(getView().getCurrentBook().getFirstChapter());
+        }
     }
 
     private String getBookPath() {
