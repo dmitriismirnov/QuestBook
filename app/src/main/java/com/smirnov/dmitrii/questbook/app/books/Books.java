@@ -11,8 +11,8 @@ import com.smirnov.dmitrii.questbook.app.App;
  */
 
 public enum Books {
-    KONAN(App.context().getString(R.string.konan_bookname), "books/konan/", "0.json"),
-    TEST("TESTBOOK", "books/testbook/", "1.json");
+    KONAN(App.context().getString(R.string.konan_bookname), "books/konan/", "0"),
+    TEST("TESTBOOK", "books/testbook/", "1");
 
 
     private String mBookName;

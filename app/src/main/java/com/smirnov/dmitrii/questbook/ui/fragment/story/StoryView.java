@@ -41,5 +41,8 @@ public interface StoryView extends IView {
     @NonNull
     StoryModel getCurrentChapter();
 
-    void setCurrentChapter(@NonNull StoryModel storyModel);
+    @NonNull
+    String getCurrentChapterName();
+
+    void setCurrentChapter(@NonNull StoryModel storyModel, @NonNull String chapterName);
 }

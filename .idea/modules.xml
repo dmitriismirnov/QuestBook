@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/QB.iml" filepath="$PROJECT_DIR$/QB.iml" />
+      <module fileurl="file://C:\1\SmiDmi\QuestBook\QB.iml" filepath="C:\1\SmiDmi\QuestBook\QB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuestBook.iml" filepath="$PROJECT_DIR$/QuestBook.iml" />
       <module fileurl="file://E:\ANDROID\Projects\QB\QuestBook.iml" filepath="E:\ANDROID\Projects\QB\QuestBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvp/mvp.iml" filepath="$PROJECT_DIR$/mvp/mvp.iml" />

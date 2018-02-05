@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.app.books.Books;
+import com.smirnov.dmitrii.questbook.app.cache.DataProvider;
 import com.smirnov.dmitrii.questbook.ui.fragment.BaseFragmentView;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.StoryAdapter;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingListener;
@@ -19,8 +20,12 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.UserInteractionLi
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
+import com.smirnov.dmitrii.questbook.ui.model.story.StoryProgress;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.widget.StoryUserActionView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -48,6 +53,8 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     private StoryAdapter mAdapter;
     private StoryModel mCurrentStoryModel;
     private Books mCurrentBook;
+    private String mCurrentChapter;
+    private List<String> mCurrentFlags;
 
     @NonNull
     public static Fragment newInstance(@NonNull Bundle extras) {
@@ -73,10 +80,17 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         super.onViewCreated(view, savedInstanceState);
         mAdapter = new StoryAdapter(getContext());
         mStoryList.setAdapter(mAdapter);
-        mCurrentBook = (Books) getArguments().getSerializable(EXTRA_BOOK_TYPE);
 
         //TODO impl continuing
         boolean isContinued = getArguments().getBoolean(EXTRA_CONTINUE, false);
+
+        if (isContinued) {
+            loadProgress();
+        } else {
+            mCurrentBook = (Books) getArguments().getSerializable(EXTRA_BOOK_TYPE);
+            mCurrentChapter = mCurrentBook.getFirstChapter();
+            mCurrentFlags = new ArrayList<>();
+        }
 
         getPresenter().init();
     }
@@ -94,6 +108,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         mAdapter.setTextDisplayFinishListener(null);
         mActionView.setUserInteractionListener(null);
 //        mAdapter.setUserInteractionListener(null);
+        saveProgress();
         super.onPause();
     }
 
@@ -175,14 +190,33 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         return mCurrentStoryModel;
     }
 
+    @NonNull
     @Override
-    public void setCurrentChapter(@NonNull StoryModel storyModel) {
+    public String getCurrentChapterName() {
+        return mCurrentChapter;
+    }
+
+    @Override
+    public void setCurrentChapter(@NonNull StoryModel storyModel, @NonNull String chapterName) {
         mCurrentStoryModel = storyModel;
+        mCurrentChapter = chapterName;
     }
 
     public static int getTargetScrollPosition(@NonNull RecyclerView view) {
         return view.computeVerticalScrollRange() - view.computeVerticalScrollOffset();
     }
 
+    private void saveProgress() {
+        StoryProgress progress = new StoryProgress(mCurrentBook, mCurrentChapter, mCurrentFlags);
+        DataProvider.provide().storeStoryProgress(progress);
+    }
 
+    private void loadProgress() {
+        StoryProgress progress = DataProvider.provide().getStoryProgress();
+        if (progress != null) {
+            mCurrentBook = progress.getBook();
+            mCurrentChapter = progress.getChapter();
+            mCurrentFlags = progress.getFlags();
+        }
+    }
 }

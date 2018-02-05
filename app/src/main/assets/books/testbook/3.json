@@ -3,12 +3,12 @@
     {
       "name": "action1",
       "flags": [],
-      "next": "1.json"
+      "next": "1"
     },
     {
       "name": "action2",
       "flags": [],
-      "next": "2.json"
+      "next": "2"
     }
   ],
   "text": "chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 chapter3 "
