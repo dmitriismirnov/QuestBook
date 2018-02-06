@@ -9,11 +9,11 @@ import com.google.gson.annotations.SerializedName;
 
 public enum FlagType {
     @SerializedName("user_has")
-    USER_HAS,           //если у персонажа есть
+    USER_HAS,           //true если у персонажа есть все флаги из списка
     @SerializedName("user_has_not")
-    USER_HAS_NOT,       //если у персонажа нет
+    USER_HAS_NOT,       //true если у персонажа нет всех флагов из списка
     @SerializedName("add_flag")
-    ADD_FLAG,           //добавление флага
+    ADD_FLAG,           //добавление всех флагов из списка юзеру
     @SerializedName("remove_flag")
-    REMOVE_FLAG         //если у персонажа есть, удаление флага
+    REMOVE_FLAG         //true если у персонажа есть  все флаги из списка, удаление флага
 }
