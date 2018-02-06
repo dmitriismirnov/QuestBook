@@ -1,4 +1,4 @@
-package com.smirnov.dmitrii.questbook.ui.model.story.action;
+package com.smirnov.dmitrii.questbook.ui.model.story.flags;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import java.util.List;
  * @version 26.11.2017.
  */
 
+@Deprecated
 public class AndFlag extends FlagModel {
 
     public AndFlag(List<String> items) {
@@ -14,7 +15,7 @@ public class AndFlag extends FlagModel {
     }
 
     @Override
-    boolean canPassTheFlag(List<String> userItems) {
+    public boolean canPassTheFlag(List<String> userItems) {
         for (String flag : getFlags()) {
             boolean currentFlagFound = false;
             for (String userItem : userItems) {
@@ -31,7 +32,7 @@ public class AndFlag extends FlagModel {
     }
 
     @Override
-    void passTheFlag(List<String> userItems) {
+    public void passTheFlag(List<String> userItems) {
         //do nothing
     }
 }

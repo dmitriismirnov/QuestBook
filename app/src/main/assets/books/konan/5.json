@@ -9,7 +9,10 @@
       "name": "Пойдёте на юг?",
       "flags": [
         {
-          "not": "14"
+          "type": "user_has_not",
+          "names": [
+            "14"
+          ]
         }
       ],
       "next": "75"
@@ -18,7 +21,10 @@
       "name": "Пойдёте на север?",
       "flags": [
         {
-          "has": "11"
+          "type": "user_has",
+          "names": [
+            "11"
+          ]
         }
       ],
       "next": "59"
@@ -27,7 +33,10 @@
       "name": "Пойдёте на север?",
       "flags": [
         {
-          "not": "11"
+          "type": "user_has_not",
+          "names": [
+            "14"
+          ]
         }
       ],
       "next": "69"

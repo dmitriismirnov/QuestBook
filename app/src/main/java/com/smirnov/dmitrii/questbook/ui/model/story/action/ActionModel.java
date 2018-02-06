@@ -3,6 +3,7 @@ package com.smirnov.dmitrii.questbook.ui.model.story.action;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
+import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
 
 import java.util.List;
 

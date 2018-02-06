@@ -7,7 +7,7 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryAction
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
-import com.smirnov.dmitrii.questbook.ui.model.story.action.FlagModel;
+import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
 
 import java.util.ArrayList;
 import java.util.List;
