@@ -11,7 +11,7 @@ import java.util.List;
  * @version 26.11.2017.
  */
 
-public abstract class FlagModel {
+public class FlagModel {
 
     @SerializedName("names")
     private List<String> mFlags;
@@ -26,9 +26,15 @@ public abstract class FlagModel {
         return mFlags;
     }
 
-    @Deprecated
-    public abstract boolean canPassTheFlag(List<String> userItems);
+    public FlagType getFlagType() {
+        return mType;
+    }
 
-    @Deprecated
-    public abstract void passTheFlag(List<String> userItems);
+    public boolean canPassTheFlag(List<String> userItems) {
+        return FlagsHelper.canPassTheFlag(userItems, mFlags, mType);
+    }
+
+    public void passTheFlag(List<String> userItems) {
+        FlagsHelper.passTheFlag(userItems, mFlags, mType);
+    }
 }

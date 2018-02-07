@@ -10,6 +10,8 @@ import com.google.gson.annotations.SerializedName;
 public enum FlagType {
     @SerializedName("user_has")
     USER_HAS,           //true если у персонажа есть все флаги из списка
+    @SerializedName("user_has_at_least")
+    USER_HAS_AT_LEAST,  //true если у персонажа есть один любой флаг из списка
     @SerializedName("user_has_not")
     USER_HAS_NOT,       //true если у персонажа нет всех флагов из списка
     @SerializedName("add_flag")
