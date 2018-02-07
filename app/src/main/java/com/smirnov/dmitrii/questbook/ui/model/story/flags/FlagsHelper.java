@@ -11,6 +11,8 @@ import java.util.List;
 
 final class FlagsHelper {
 
+    private final static String TAG = FlagsHelper.class.getSimpleName();
+
     static boolean canPassTheFlag(@NonNull List<String> userItems, @NonNull List<String> flags, @NonNull FlagType type) {
         switch (type) {
             case USER_HAS:

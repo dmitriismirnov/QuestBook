@@ -8,6 +8,8 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryAction
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 
+import java.util.List;
+
 import ru.mvp.IView;
 
 /**
@@ -43,6 +45,15 @@ public interface StoryView extends IView {
 
     @NonNull
     String getCurrentChapterName();
+
+    @NonNull
+    List<String> getUserItems();
+
+    void addUserItem(@NonNull String item);
+
+    boolean isUserHasItem(@NonNull String item);
+
+    void removeItem(@NonNull String item);
 
     void setCurrentChapter(@NonNull StoryModel storyModel, @NonNull String chapterName);
 }

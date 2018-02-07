@@ -22,19 +22,19 @@ public class FlagModel {
         this.mFlags = flags;
     }
 
-    public List<String> getFlags() {
-        return mFlags;
-    }
-
-    public FlagType getFlagType() {
-        return mType;
-    }
-
     public boolean canPassTheFlag(List<String> userItems) {
         return FlagsHelper.canPassTheFlag(userItems, mFlags, mType);
     }
 
     public void passTheFlag(List<String> userItems) {
         FlagsHelper.passTheFlag(userItems, mFlags, mType);
+    }
+
+    @Override
+    public String toString() {
+        return "FlagModel{" +
+                "mFlags=" + mFlags +
+                ", mType=" + mType +
+                '}';
     }
 }

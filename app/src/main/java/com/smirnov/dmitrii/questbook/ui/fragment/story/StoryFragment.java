@@ -44,6 +44,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     private static final String EXTRA_BOOK_TYPE = "book-type";
     private static final String EXTRA_CONTINUE = "is-continue";
+    private static final int SCROLL_DOWN_DEFAULT_DELAY = 300;
 
     @BindView(R.id.recycler_view)
     RecyclerView mStoryList;
@@ -175,7 +176,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @Override
     public void scrollDownDelayed() {
-        new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), 300);
+        new Handler().postDelayed(() -> mStoryList.smoothScrollBy(0, getTargetScrollPosition(mStoryList)), SCROLL_DOWN_DEFAULT_DELAY);
     }
 
     @NonNull
@@ -194,6 +195,32 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @Override
     public String getCurrentChapterName() {
         return mCurrentChapter;
+    }
+
+    @NonNull
+    @Override
+    public List<String> getUserItems() {
+//        List<String> tmp = new ArrayList<>();
+//        tmp.add("11");
+//        return tmp;
+        return mCurrentFlags;
+    }
+
+    @Override
+    public void addUserItem(@NonNull String item) {
+        mCurrentFlags.add(item);
+        saveProgress();
+    }
+
+    @Override
+    public boolean isUserHasItem(@NonNull String item) {
+        return mCurrentFlags.contains(item);
+    }
+
+    @Override
+    public void removeItem(@NonNull String item) {
+        mCurrentFlags.remove(item);
+        saveProgress();
     }
 
     @Override

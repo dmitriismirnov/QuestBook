@@ -29,35 +29,18 @@ public class ActionModel {
         this.mNextChapter = nextChapter;
     }
 
-    public void passWithFlag(@Nullable FlagModel flag, List<String> userItems) {
-        if (flag == null) {
+    public void pass(List<String> userItems) {
+        if (mFlags == null) {
             return;
         }
-        flag.passTheFlag(userItems);
-    }
-
-    public boolean atLeastOneFlagCanPass(@Nullable List<String> userItems) {
-        if (mFlags == null || mFlags.isEmpty()) {
-            return true;
-        }
-        if (userItems == null || userItems.isEmpty()) {
-            return false;
-        }
-
         for (FlagModel flag : mFlags) {
-            if (flag.canPassTheFlag(userItems)) {
-                return true;
-            }
+            flag.passTheFlag(userItems);
         }
-        return false;
     }
 
     public boolean allFlagsCanPass(@Nullable List<String> userItems) {
         if (mFlags == null || mFlags.isEmpty()) {
             return true;
-        }
-        if (userItems == null || userItems.isEmpty()) {
-            return false;
         }
 
         for (FlagModel flag : mFlags) {
@@ -74,5 +57,14 @@ public class ActionModel {
 
     public String getNextChapter() {
         return mNextChapter;
+    }
+
+    @Override
+    public String toString() {
+        return "ActionModel{" +
+                "mName='" + mName + '\'' +
+                ", mFlags=" + mFlags +
+                ", mNextChapter='" + mNextChapter + '\'' +
+                '}';
     }
 }
