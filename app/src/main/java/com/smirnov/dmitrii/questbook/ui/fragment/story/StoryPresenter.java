@@ -7,6 +7,8 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryAction
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
+import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
+import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagsHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,15 +71,31 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         StoryModel newChapter = GsonUtils.fromJson(jsonStr, StoryModel.class);
 
         if (newChapter != null) {
-            getView().setCurrentChapter(newChapter, chapterName);
-            getView().addStoryItem(
-                    new StoryChaperItem(
-                            getView().getCurrentChapter().getText()));
+            activateChapter(newChapter, chapterName);
         } else {
             getView().showToastMessage("chapter is missing\nrestarting book");
             getView().resetStory();
             processChapter(getView().getCurrentBook().getFirstChapter());
         }
+    }
+
+    private void activateChapter(@NonNull StoryModel newChapter, @NonNull String chapterName) {
+        LogUtils.d(TAG, "User Items before activation: " + getView().getUserItems().toString());
+
+        List<FlagModel> chapterFlags = newChapter.getFlags();
+        if (chapterFlags != null && !chapterFlags.isEmpty()) {
+            for (FlagModel flag : chapterFlags) {
+                flag.passTheFlag(getView().getUserItems());
+            }
+        }
+
+        LogUtils.d(TAG, "User Items after activation: " + getView().getUserItems().toString());
+
+
+        getView().setCurrentChapter(newChapter, chapterName);
+        getView().addStoryItem(
+                new StoryChaperItem(
+                        getView().getCurrentChapter().getText()));
     }
 
     private String getBookPath() {

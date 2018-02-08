@@ -101,10 +101,10 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ChapterViewHolder) {
             if (position + 1 == getItemCount()) {
-                LogUtils.d(TAG, "bind last item#" + position + ": " + getItem(position).toString());
+//                LogUtils.d(TAG, "bind last item#" + position + ": " + getItem(position).toString());
                 ((ChapterViewHolder) holder).bind(getItem(position));
             } else {
-                LogUtils.d(TAG, "REbind item#" + position + ": " + getItem(position).toString());
+//                LogUtils.d(TAG, "REbind item#" + position + ": " + getItem(position).toString());
                 ((ChapterViewHolder) holder).rebind(getItem(position));
             }
         } else if (holder instanceof ActionViewHolder) {

@@ -2,6 +2,7 @@ package com.smirnov.dmitrii.questbook.ui.model.story;
 
 import com.google.gson.annotations.SerializedName;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
+import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class StoryModel {
     private String mText;
     @SerializedName("actions")
     private List<ActionModel> mActions;
+    @SerializedName("flags")
+    private List<FlagModel> mFlags;
 
     public StoryModel() {
     }
@@ -32,5 +35,9 @@ public class StoryModel {
 
     public List<ActionModel> getActions() {
         return mActions;
+    }
+
+    public List<FlagModel> getFlags() {
+        return mFlags;
     }
 }

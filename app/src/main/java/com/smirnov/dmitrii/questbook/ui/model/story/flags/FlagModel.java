@@ -18,8 +18,20 @@ public class FlagModel {
     @SerializedName("type")
     private FlagType mType;
 
-    public FlagModel(List<String> flags) {
+    public FlagModel(List<String> flags, FlagType type) {
         this.mFlags = flags;
+        this.mType = type;
+    }
+
+    public FlagModel() {
+    }
+
+    public List<String> getFlags() {
+        return mFlags;
+    }
+
+    public FlagType getType() {
+        return mType;
     }
 
     public boolean canPassTheFlag(List<String> userItems) {

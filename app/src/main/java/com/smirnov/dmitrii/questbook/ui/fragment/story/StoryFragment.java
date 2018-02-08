@@ -55,7 +55,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     private StoryModel mCurrentStoryModel;
     private Books mCurrentBook;
     private String mCurrentChapter;
-    private List<String> mCurrentFlags;
+    public List<String> mCurrentFlags;
 
     @NonNull
     public static Fragment newInstance(@NonNull Bundle extras) {

@@ -2,14 +2,17 @@ package com.smirnov.dmitrii.questbook.ui.model.story.flags;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import ru.utils.LogUtils;
 
 /**
  * @author Dmitry Smirnov
  * @version 07.02.2018.
  */
 
-final class FlagsHelper {
+public final class FlagsHelper {
 
     private final static String TAG = FlagsHelper.class.getSimpleName();
 
@@ -29,7 +32,7 @@ final class FlagsHelper {
         return false;
     }
 
-    static void passTheFlag(List<String> userItems, List<String> flags, FlagType type) {
+    public static void passTheFlag(List<String> userItems, List<String> flags, FlagType type) {
         switch (type) {
             case USER_HAS:
                 passUserHasFlag(userItems, flags);
@@ -54,8 +57,15 @@ final class FlagsHelper {
     }
 
     private static void passAddItemFlag(List<String> userItems, List<String> flags) {
-        userItems.addAll(flags);
+        LogUtils.d(TAG, "userItems before addition" + userItems.toString());
+        LogUtils.d(TAG, "flags to add" + flags.toString());
+//        userItems.addAll(flags);
+        for(String f : flags){
+            userItems.add(f);
+        }
+        LogUtils.d(TAG, "userItems after addition" + userItems.toString());
     }
+
 
 
     /*****************************
