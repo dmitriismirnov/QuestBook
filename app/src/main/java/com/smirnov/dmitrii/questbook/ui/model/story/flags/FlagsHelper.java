@@ -2,10 +2,7 @@ package com.smirnov.dmitrii.questbook.ui.model.story.flags;
 
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import ru.utils.LogUtils;
 
 /**
  * @author Dmitry Smirnov
@@ -36,14 +33,19 @@ public final class FlagsHelper {
         switch (type) {
             case USER_HAS:
                 passUserHasFlag(userItems, flags);
+                break;
             case USER_HAS_AT_LEAST:
                 passUserHasAtLeastFlag(userItems, flags);
+                break;
             case USER_HAS_NOT:
                 passUserHasNotFlag(userItems, flags);
+                break;
             case ADD_FLAG:
                 passAddItemFlag(userItems, flags);
+                break;
             case REMOVE_FLAG:
                 passRemoveItemFlag(userItems, flags);
+                break;
         }
     }
 
@@ -57,15 +59,8 @@ public final class FlagsHelper {
     }
 
     private static void passAddItemFlag(List<String> userItems, List<String> flags) {
-        LogUtils.d(TAG, "userItems before addition" + userItems.toString());
-        LogUtils.d(TAG, "flags to add" + flags.toString());
-//        userItems.addAll(flags);
-        for(String f : flags){
-            userItems.add(f);
-        }
-        LogUtils.d(TAG, "userItems after addition" + userItems.toString());
+        userItems.addAll(flags);
     }
-
 
 
     /*****************************

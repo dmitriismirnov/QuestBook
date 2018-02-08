@@ -13,15 +13,12 @@ import java.util.List;
 
 public class FlagModel {
 
+    private final static String TAG = FlagModel.class.getSimpleName();
+
     @SerializedName("names")
     private List<String> mFlags;
     @SerializedName("type")
     private FlagType mType;
-
-    public FlagModel(List<String> flags, FlagType type) {
-        this.mFlags = flags;
-        this.mType = type;
-    }
 
     public FlagModel() {
     }
