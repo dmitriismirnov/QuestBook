@@ -29,7 +29,7 @@ public final class FlagsHelper {
         return false;
     }
 
-    public static void passTheFlag(List<String> userItems, List<String> flags, FlagType type) {
+    static void passTheFlag(List<String> userItems, List<String> flags, FlagType type) {
         switch (type) {
             case USER_HAS:
                 passUserHasFlag(userItems, flags);

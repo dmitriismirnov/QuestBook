@@ -8,7 +8,6 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaper
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
-import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagsHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +21,17 @@ import ru.utils.data.GsonUtils;
  * @version 14.11.2017.
  */
 
-public class StoryPresenter extends RxPresenter<StoryView> {
+class StoryPresenter extends RxPresenter<StoryView> {
 
     private static final String TAG = StoryPresenter.class.getSimpleName();
 
-    public void init() {
+    void init() {
         getView().resetStory();
 
         processChapter(getView().getCurrentChapterName());
     }
 
-    public void processTextShown() {
+    void processTextShown() {
         getView().setUserAction(
                 new StoryActionItem(
                         getPossibleActions(
@@ -58,7 +57,7 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         return result;
     }
 
-    public void processActionChosen(@NonNull ActionModel action) {
+    void processActionChosen(@NonNull ActionModel action) {
         getView().showToastMessage(action.getNextChapter());
         getView().hideUserAction();
         action.pass(
@@ -66,7 +65,7 @@ public class StoryPresenter extends RxPresenter<StoryView> {
         processChapter(action.getNextChapter());
     }
 
-    void processChapter(@NonNull String chapterName) {
+    private void processChapter(@NonNull String chapterName) {
         String jsonStr = CommonUtils.loadAsset(getBookPath() + chapterName + ".json");
         StoryModel newChapter = GsonUtils.fromJson(jsonStr, StoryModel.class);
 
@@ -81,16 +80,13 @@ public class StoryPresenter extends RxPresenter<StoryView> {
 
     private void activateChapter(@NonNull StoryModel newChapter, @NonNull String chapterName) {
         LogUtils.d(TAG, "User Items before activation: " + getView().getUserItems().toString());
-
         List<FlagModel> chapterFlags = newChapter.getFlags();
         if (chapterFlags != null && !chapterFlags.isEmpty()) {
             for (FlagModel flag : chapterFlags) {
                 flag.passTheFlag(getView().getUserItems());
             }
         }
-
         LogUtils.d(TAG, "User Items after activation: " + getView().getUserItems().toString());
-
 
         getView().setCurrentChapter(newChapter, chapterName);
         getView().addStoryItem(
