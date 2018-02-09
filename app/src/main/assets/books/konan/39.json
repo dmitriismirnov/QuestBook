@@ -1,0 +1,70 @@
+{
+  "actions": [
+    {
+      "name": "Пойдёте на юг",
+      "flags": [
+        {
+          "type": "user_has_not",
+          "names": [
+            "14"
+          ]
+        }
+      ],
+      "next": "131"
+    },
+    {
+      "name": "На восток?",
+      "flags": [
+        {
+          "type": "user_has",
+          "names": [
+            "17"
+          ]
+        }
+      ],
+      "next": "139"
+    },
+    {
+      "name": "На восток?",
+      "flags": [
+        {
+          "type": "user_has_not",
+          "names": [
+            "17"
+          ]
+        }
+      ],
+      "next": "7"
+    },
+    {
+      "name": "На север?",
+      "flags": [
+        {
+          "type": "user_has",
+          "names": [
+            "11"
+          ]
+        }
+      ],
+      "next": "79"
+    },
+    {
+      "name": "На север?",
+      "flags": [
+        {
+          "type": "user_has_not",
+          "names": [
+            "11"
+          ]
+        }
+      ],
+      "next": "97"
+    },
+    {
+      "name": "На запад?",
+      "flags": [],
+      "next": "109"
+    }
+  ],
+  "text": "Конан снова вернулся на перекрёсток ходов."
+}
