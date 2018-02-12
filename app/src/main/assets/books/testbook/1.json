@@ -1,16 +1,13 @@
 {
   "actions": [
     {
-    "name":"action2",
-    "flags":[],
-    "next":"2"
+      "name": "action2",
+      "next": "2"
     },
-     {
-    "name":"action3",
-    "flags":[],
-    "next":"3"
+    {
+      "name": "action3",
+      "next": "3"
     }
   ],
-
   "text": "chapter1"
 }
