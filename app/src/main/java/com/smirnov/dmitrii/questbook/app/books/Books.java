@@ -11,8 +11,7 @@ import com.smirnov.dmitrii.questbook.app.App;
  */
 
 public enum Books {
-    KONAN(App.context().getString(R.string.konan_bookname), "books/konan/", "5"),
-//    KONAN(App.context().getString(R.string.konan_bookname), "books/konan/", "0"),
+    KONAN(App.context().getString(R.string.konan_bookname), "books/konan/", "0"),
     TEST("TESTBOOK", "books/testbook/", "1");
 
 
