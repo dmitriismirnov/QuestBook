@@ -5,23 +5,30 @@ import android.support.annotation.NonNull;
 
 import com.smirnov.dmitrii.questbook.R;
 
-import ru.utils.LogUtils;
-
 /**
  * Created by Дмитрий on 19.11.2017.
  */
 
-public class StoryChaperItem extends StoryItem {
+public class StoryChapterItem extends StoryItem {
 
     private String mChapterText;
+    private boolean mIsNeedDisplayAnimation = true;
 
-    public StoryChaperItem(@NonNull String chapterText) {
+    public StoryChapterItem(@NonNull String chapterText) {
         super(StoryItemType.CHAPTER);
         this.mChapterText = chapterText;
     }
 
-    public String getChapterText(){
+    public String getChapterText() {
         return mChapterText;
+    }
+
+    public boolean isNeedDisplayAnimation() {
+        return mIsNeedDisplayAnimation;
+    }
+
+    public void setTextAnimated() {
+        mIsNeedDisplayAnimation = false;
     }
 
     @LayoutRes

@@ -4,7 +4,7 @@ import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.app.App;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.Images;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChapterItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
@@ -22,8 +22,8 @@ public class Generator {
 
     private static Random mRandom = new Random();
 
-    public static StoryChaperItem getRandomChapterItem() {
-        return new StoryChaperItem(getRandomDebugText());
+    public static StoryChapterItem getRandomChapterItem() {
+        return new StoryChapterItem(getRandomDebugText());
     }
 
     public static StoryActionItem getRandomActionItem() {

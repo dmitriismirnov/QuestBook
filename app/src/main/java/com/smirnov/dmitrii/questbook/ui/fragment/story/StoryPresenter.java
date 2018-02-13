@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.smirnov.dmitrii.questbook.app.utils.CommonUtils;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
-import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChaperItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChapterItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
@@ -92,7 +92,7 @@ class StoryPresenter extends RxPresenter<StoryView> {
 
         getView().setCurrentChapter(newChapter, chapterName);
         getView().addStoryItem(
-                new StoryChaperItem(
+                new StoryChapterItem(
                         getView().getCurrentChapter().getText()));
     }
 
