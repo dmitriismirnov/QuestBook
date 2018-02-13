@@ -44,7 +44,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     private static final String EXTRA_BOOK_TYPE = "book-type";
     private static final String EXTRA_CONTINUE = "is-continue";
-    private static final int SCROLL_DOWN_DEFAULT_DELAY = 300;
+    private static final int SCROLL_DOWN_DEFAULT_DELAY = 100;
 
     @BindView(R.id.recycler_view)
     RecyclerView mStoryList;
@@ -116,6 +116,13 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @Override
     public void resetStory() {
         mAdapter.removeAllItems();
+        resetProgress();
+    }
+
+    private void resetProgress() {
+        mCurrentFlags.clear();
+        mCurrentChapter = mCurrentBook.getFirstChapter();
+        saveProgress();
     }
 
     @Override
@@ -171,7 +178,8 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
 
     @Override
     public void scrollDown() {
-        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+//        mStoryList.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+        scrollDownDelayed();
     }
 
     @Override

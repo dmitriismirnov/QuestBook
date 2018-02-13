@@ -26,8 +26,6 @@ class StoryPresenter extends RxPresenter<StoryView> {
     private static final String TAG = StoryPresenter.class.getSimpleName();
 
     void init() {
-        getView().resetStory();
-
         processChapter(getView().getCurrentChapterName());
     }
 
@@ -66,6 +64,10 @@ class StoryPresenter extends RxPresenter<StoryView> {
     }
 
     private void processChapter(@NonNull String chapterName) {
+        if (chapterName.equalsIgnoreCase(getBookFirstChapter())) {
+            resetStory();
+        }
+
         String jsonStr = CommonUtils.loadAsset(getBookPath() + chapterName + ".json");
         StoryModel newChapter = GsonUtils.fromJson(jsonStr, StoryModel.class);
 
@@ -94,8 +96,15 @@ class StoryPresenter extends RxPresenter<StoryView> {
                         getView().getCurrentChapter().getText()));
     }
 
+    private String getBookFirstChapter() {
+        return getView().getCurrentBook().getFirstChapter();
+    }
+
     private String getBookPath() {
         return getView().getCurrentBook().getBookPath();
     }
 
+    private void resetStory() {
+        getView().resetStory();
+    }
 }

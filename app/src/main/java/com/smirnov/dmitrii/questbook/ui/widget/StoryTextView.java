@@ -15,10 +15,11 @@ import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.TextDisplayingLis
 public class StoryTextView extends android.support.v7.widget.AppCompatTextView {
 
     private final static String TAG = StoryTextView.class.getSimpleName();
+    private final static long DEFAULT_SHOW_CHARACTER_DELAY = 40;
 
     private CharSequence mChars;
     private int mIndex;
-    private long mDelay = 50; //default is 50 milliseconds
+    private long mDelay = DEFAULT_SHOW_CHARACTER_DELAY;
     private TextDisplayingListener mListener;
     private Handler mHandler = new Handler();
     private Runnable mRunnable;

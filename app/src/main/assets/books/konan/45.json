@@ -5,7 +5,7 @@
       "next": "121"
     },
     {
-      "name": "action3",
+      "name": "Пойдёте дальше?",
       "flags": [
         {
           "type": "user_has",
@@ -17,7 +17,7 @@
       "next": "197"
     },
     {
-      "name": "action3",
+      "name": "Пойдёте дальше?",
       "flags": [
         {
           "type": "user_has_not",
