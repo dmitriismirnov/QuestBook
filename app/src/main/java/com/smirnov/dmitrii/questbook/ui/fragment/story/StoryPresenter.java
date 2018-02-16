@@ -3,8 +3,10 @@ package com.smirnov.dmitrii.questbook.ui.fragment.story;
 import android.support.annotation.NonNull;
 
 import com.smirnov.dmitrii.questbook.app.utils.CommonUtils;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.Images;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryActionItem;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryChapterItem;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.StoryImageItem;
 import com.smirnov.dmitrii.questbook.ui.model.story.StoryModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
@@ -91,6 +93,11 @@ class StoryPresenter extends RxPresenter<StoryView> {
         LogUtils.d(TAG, "User Items after activation: " + getView().getUserItems().toString());
 
         getView().setCurrentChapter(newChapter, chapterName);
+        Images img = newChapter.getImage();
+        if (img != null && img != Images.NO_IMAGE) {
+            getView().addStoryItem(
+                    new StoryImageItem(img));
+        }
         getView().addStoryItem(
                 new StoryChapterItem(
                         getView().getCurrentChapter().getText()));

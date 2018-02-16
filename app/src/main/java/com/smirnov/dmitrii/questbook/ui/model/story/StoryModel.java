@@ -1,6 +1,7 @@
 package com.smirnov.dmitrii.questbook.ui.model.story;
 
 import com.google.gson.annotations.SerializedName;
+import com.smirnov.dmitrii.questbook.ui.fragment.story.helpers.items.Images;
 import com.smirnov.dmitrii.questbook.ui.model.story.action.ActionModel;
 import com.smirnov.dmitrii.questbook.ui.model.story.flags.FlagModel;
 
@@ -25,6 +26,8 @@ public class StoryModel {
     private List<ActionModel> mActions;
     @SerializedName("flags")
     private List<FlagModel> mFlags;
+    @SerializedName("image")
+    private Images mImage;
 
     public StoryModel() {
     }
@@ -39,5 +42,9 @@ public class StoryModel {
 
     public List<FlagModel> getFlags() {
         return mFlags;
+    }
+
+    public Images getImage() {
+        return mImage;
     }
 }

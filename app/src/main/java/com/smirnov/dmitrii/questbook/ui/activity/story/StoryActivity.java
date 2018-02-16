@@ -10,11 +10,13 @@ import android.support.v4.app.Fragment;
 
 import com.smirnov.dmitrii.questbook.R;
 import com.smirnov.dmitrii.questbook.app.books.Books;
+import com.smirnov.dmitrii.questbook.app.cache.DataProvider;
 import com.smirnov.dmitrii.questbook.ui.activity.BaseFragmentActivity;
 import com.smirnov.dmitrii.questbook.ui.fragment.story.StoryFragment;
 import com.smirnov.dmitrii.questbook.ui.widget.common.NavigationToolbar;
 
 import butterknife.BindView;
+import ru.utils.LogUtils;
 
 /**
  * @author Dmitry Smirnov
@@ -31,7 +33,7 @@ public class StoryActivity extends BaseFragmentActivity {
     @BindView(R.id.toolbar)
     NavigationToolbar mToolbar;
 
-    protected static void start(@NonNull Activity activity, @Nullable Books book, boolean isContinue) {
+    protected static void start(@NonNull Activity activity, @NonNull Books book, boolean isContinue) {
         Intent intent = new Intent(activity, StoryActivity.class);
         intent.putExtra(EXTRA_BOOK_TYPE, book);
         intent.putExtra(EXTRA_CONTINUE, isContinue);
@@ -42,14 +44,16 @@ public class StoryActivity extends BaseFragmentActivity {
         start(activity, book, false);
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static void load(@NonNull Activity activity) {
-        start(activity, null, true);
+        start(activity, DataProvider.provide().getStoryProgress().getBook(), true);
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-    }
+    protected void onResume() {
+        super.onResume();
+        LogUtils.d(TAG, getBook().getBookName());
+        mToolbar.setTitle(getBook().getBookName());  }
 
     @Override
     protected int getLayoutId() {
