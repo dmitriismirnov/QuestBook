@@ -100,13 +100,7 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ChapterViewHolder) {
-//            if (position + 1 == getItemCount()) {
-//                LogUtils.d(TAG, "bind last item#" + position + ": " + getItem(position).toString());
-                ((ChapterViewHolder) holder).bind(getItem(position));
-//            } else {
-//                LogUtils.d(TAG, "REbind item#" + position + ": " + getItem(position).toString());
-//                ((ChapterViewHolder) holder).rebind(getItem(position));
-//            }
+            ((ChapterViewHolder) holder).bind(getItem(position));
         } else if (holder instanceof ActionViewHolder) {
             ((ActionViewHolder) holder).bind(getItem(position), position);
         } else if (holder instanceof ImageViewHolder) {
@@ -143,7 +137,6 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mChapterView.displayTextWithAnimation(chapterItem.getChapterText());
             mChapterView.setOnClickListener(v -> {
                 mChapterView.finishDisplaying();
-//                mChapterView.setTextDisplayListener(null);
             });
             mChapterView.setTextDisplayListener(new TextDisplayingListener() {
                 @Override
@@ -164,8 +157,7 @@ public class StoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             });
         }
 
-        void rebind(StoryItem item) {
-            StoryChapterItem chaperItem = (StoryChapterItem) item;
+        void rebind(StoryChapterItem chaperItem) {
             mChapterView.removeCallbacks();
             mChapterView.setText(chaperItem.getChapterText());
         }

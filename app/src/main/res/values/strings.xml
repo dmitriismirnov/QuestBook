@@ -26,5 +26,7 @@
         Aliquam ornare, erat non laoreet dictum, lorem felis ultricies dolor, a venenatis dui nulla sed risus. In convallis arcu sed varius posuere. Ut dapibus pulvinar tellus.</string>
 
     <string name="konan_bookname">КОНАН</string>
+    <string name="new_game">Новая игра</string>
+    <string name="continue_gamer">Продолжить</string>
 
 </resources>
