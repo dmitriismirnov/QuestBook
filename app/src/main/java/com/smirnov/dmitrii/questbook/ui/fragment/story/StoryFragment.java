@@ -82,7 +82,6 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
         mAdapter = new StoryAdapter(getContext());
         mStoryList.setAdapter(mAdapter);
 
-        //TODO impl continuing
         boolean isContinued = getArguments().getBoolean(EXTRA_CONTINUE, false);
 
         if (isContinued) {
@@ -91,6 +90,7 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
             mCurrentBook = (Books) getArguments().getSerializable(EXTRA_BOOK_TYPE);
             mCurrentChapter = mCurrentBook.getFirstChapter();
             mCurrentFlags = new ArrayList<>();
+            saveProgress();
         }
 
         getPresenter().init();
@@ -208,9 +208,6 @@ public class StoryFragment extends BaseFragmentView<StoryView, StoryPresenter>
     @NonNull
     @Override
     public List<String> getUserItems() {
-//        List<String> tmp = new ArrayList<>();
-//        tmp.add("11");
-//        return tmp;
         return mCurrentFlags;
     }
 

@@ -27,6 +27,6 @@
 
     <string name="konan_bookname">КОНАН</string>
     <string name="new_game">Новая игра</string>
-    <string name="continue_gamer">Продолжить</string>
+    <string name="continue_game">Продолжить</string>
 
 </resources>

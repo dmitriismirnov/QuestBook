@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/new_game"
             style="@style/MainScreenButton"
-            android:text="@string/konan_bookname" />
+            android:text="@string/new_game" />
 
         <TextView
             android:id="@+id/test_game"
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/continue_game"
             style="@style/MainScreenButton"
-            android:text="CONTINUE" />
+            android:text="@string/continue_game" />
 
     </LinearLayout>
 
