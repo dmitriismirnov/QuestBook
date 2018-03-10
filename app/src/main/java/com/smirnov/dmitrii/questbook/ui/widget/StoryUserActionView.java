@@ -1,5 +1,6 @@
 package com.smirnov.dmitrii.questbook.ui.widget;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
@@ -36,7 +37,7 @@ public class StoryUserActionView extends LinearLayout {
     LinearLayout mActionContainer;
 
     private UserInteractionListener mUserInteractionListener;
-
+    private boolean isClickPossible = true;
 
     public StoryUserActionView(Context context) {
         super(context);
@@ -81,36 +82,31 @@ public class StoryUserActionView extends LinearLayout {
     }
 
     public void show() {
+        unBlockClick();
         AnimUtils.animateViewAppear(mActionContainer, R.anim.slide_in_from_bottom);
     }
 
     public void hide() {
+        blockClick();
         AnimUtils.animateViewHide(mActionContainer, R.anim.slide_out_to_bottom);
+    }
 
-//        AnimUtils.animateViewWithBasicCallback(mActionContainer, R.anim.slide_out_to_bottom, new Animation.AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                mActionContainer.setVisibility(View.GONE);
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//
-//            }
-//        });
+    private void unBlockClick(){
+        isClickPossible = true;
+    }
+    private void blockClick(){
+        isClickPossible = false;
     }
 
     @NonNull
     private TextView getSingleActionItemView(@NonNull final ActionModel action) {
+        @SuppressLint("InflateParams")
         TextView v = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.item_action, null);
         v.setText(action.getName());
         v.setOnClickListener(v1 -> {
-            if (mUserInteractionListener != null) {
+            if (mUserInteractionListener != null && isClickPossible) {
                 mUserInteractionListener.onChooseAction(action);
+//                mUserInteractionListener = null;
             }
         });
         return v;
