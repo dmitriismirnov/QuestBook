@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -70,7 +71,6 @@ public class StoryUserActionView extends LinearLayout {
     }
 
     public void setUpActionItem(@NonNull StoryActionItem actionItem) {
-//        clear();
         List<ActionModel> actionList = actionItem.getActionList();
         for (int i = 0; i < actionList.size(); i++) {
             mActionContainer.addView(getSingleActionItemView(actionList.get(i)));
@@ -99,14 +99,16 @@ public class StoryUserActionView extends LinearLayout {
     }
 
     @NonNull
-    private TextView getSingleActionItemView(@NonNull final ActionModel action) {
+    private View getSingleActionItemView(@NonNull final ActionModel action) {
         @SuppressLint("InflateParams")
         TextView v = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.item_action, null);
         v.setText(action.getName());
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.topMargin = 10;
+        v.setLayoutParams(lp);
         v.setOnClickListener(v1 -> {
             if (mUserInteractionListener != null && isClickPossible) {
                 mUserInteractionListener.onChooseAction(action);
-//                mUserInteractionListener = null;
             }
         });
         return v;
